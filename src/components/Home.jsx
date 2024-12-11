@@ -46,8 +46,8 @@ function Home() {
         <h1>Products</h1>
       </div>
       <div className="main-product-container">
-        <div className="product grid grid-cols-4 max-w-[1170px] mx-auto gap-4">
-          {/* Product Data Show Heres */}
+        <div className="product grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 max-w-[1170px] md:p-14 sm:p-8 xs:p-5 mx-auto gap-4">
+          {/* Product Data Show Here */}
           {data?.map((item) => (
             <div
               className="content border p-4 rounded-lg shadow-md"
@@ -57,7 +57,7 @@ function Home() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-48 h-48 object-cover mx-auto"
+                  className="w-full h-48 object-cover mx-auto"
                 />
               </div>
               <div className="title">
@@ -65,7 +65,7 @@ function Home() {
               </div>
               <p className="text-center text-lg text-gray-700">${item.price}</p>
               <div className="button mt-3 text-center">
-                {/* Add to Cart Btns */}
+                {/* Add to Cart Btn */}
                 <button
                   onClick={() => addToCartHandler(item)}
                   className="flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
