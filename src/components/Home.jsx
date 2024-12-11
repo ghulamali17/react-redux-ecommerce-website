@@ -8,6 +8,7 @@ function Home() {
   const dispatch = useDispatch();
 
   const cartData = useSelector((state) => state.myCart?.cartItems || []);
+  const isToggled = useSelector((state) => state.myCart?.toggle || false);
 
   useEffect(() => {
     myResponse();
@@ -36,7 +37,11 @@ function Home() {
   };
 
   return (
-    <div className="pt-5">
+    <div
+      className={`pt-5  ${
+        isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
+      }  transition-all duration-300 ease-in-out`}
+    >
       <div className="text-2xl font-Jost text-center mb-4">
         <h1>Products</h1>
       </div>

@@ -1,14 +1,16 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
+import Footer from "./Footer/Footer";
 
 function AppLayout() {
   return (
     <div>
-     <Navbar/>
+      <Navbar />
       <main>
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 }

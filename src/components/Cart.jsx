@@ -23,10 +23,16 @@ function Cart() {
     dispatch(decrement(id));
   };
 
+  // Total Price Calculation
+  const totalPrice = cartData.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
   return (
     <div className="pt-5">
       <div className="text-2xl font-Jost text-center mb-4">
         <h1>Cart</h1>
+        <h1>Total {totalPrice && totalPrice.toFixed(2)}</h1>
         {cartData.length === 0
           ? "Cart is empty"
           : `${cartData.length} ${
