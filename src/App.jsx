@@ -5,7 +5,6 @@ import Route from "./Route";
 function App() {
   return (
     <div className="App">
-      {/* <appRoute /> */}
       <Route/>
     </div>
   );
