@@ -32,7 +32,7 @@ function Cart() {
 
   return (
     <div
-      className={`pt-5  ${
+      className={`pt-5 h-screen  ${
         isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
       }  transition-all duration-300 ease-in-out`}
     >
@@ -102,7 +102,9 @@ function Cart() {
                     className="w-[30%] mx-auto sm:w-[20%]"
                   />
                 </td>
-                <td className="text-center py-4">{item.title}</td>
+                <td className="text-center py-4 break-words whitespace-normal">
+                  {item.title}
+                </td>
                 <td className="text-center py-4">${item.price}</td>
                 <td className="text-center py-4">
                   <div className="flex items-center justify-center space-x-2">
@@ -110,7 +112,9 @@ function Cart() {
                       onClick={() => incrementHandler(item.id)}
                       className="text-2xl cursor-pointer text-green-500 hover:text-green-600 transition"
                     />
-                    <p className="text-lg font-semibold">{item.quantity}</p>
+                    <p className="text-lg font-semibold px-2">
+                      {item.quantity}
+                    </p>
                     <IoIosRemoveCircle
                       onClick={() => decrementHandler(item.id)}
                       className="text-2xl cursor-pointer text-red-500 hover:text-red-600 transition"

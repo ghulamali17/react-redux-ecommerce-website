@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Redux/slice";
+import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const cartData = useSelector((state) => state.myCart?.cartItems || []);
@@ -19,7 +24,7 @@ function Home() {
     try {
       const response = await axios("https://fakestoreapi.com/products");
       setData(response.data);
-      console.log(response.data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -37,61 +42,75 @@ function Home() {
   };
 
   return (
-    <div
-      className={`pt-5  ${
-        isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
-      }  transition-all duration-300 ease-in-out`}
-    >
-      <div className="text-2xl font-Jost text-center mb-4">
-        <h1>Products</h1>
-      </div>
-      <div className="main-product-container">
-        <div className="product grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 max-w-[1170px] md:p-14 sm:p-8 xs:p-5 mx-auto gap-4">
-          {/* Product Data Show Here */}
-          {data?.map((item) => (
-            <div
-              className="content border p-4 rounded-lg shadow-md"
-              key={item.id}
-            >
-              <div className="image mb-3">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-48 object-cover mx-auto"
-                />
-              </div>
-              <div className="title">
-                <h1 className="font-bold text-center">{item.title}</h1>
-              </div>
-              <p className="text-center text-lg text-gray-700">${item.price}</p>
-              <div className="button mt-3 text-center">
-                {/* Add to Cart Btn */}
-                <button
-                  onClick={() => addToCartHandler(item)}
-                  className="flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
+    <>
+      {loading !== false ? (
+        <Loading />
+      ) : (
+        <div
+          className={`pt-5 ${
+            isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
+          } transition-all duration-300 ease-in-out`}
+        >
+          {/* Title Section */}
+          <div className="text-2xl font-Jost text-center mb-4">
+            <h1>Products</h1>
+          </div>
+
+          {/* Product Container */}
+          <div className="main-product-container">
+            <div className="product grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 max-w-[1170px] md:p-14 sm:p-8 xs:p-5 mx-auto gap-4">
+              {/* Render Product Cards */}
+              {data?.map((item) => (
+                <div
+                  className="content border p-4 rounded-lg shadow-md"
+                  key={item.id}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="w-5 h-5 mr-2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 3h18l-1.25 10.25a2 2 0 01-1.98 1.75H7.23a2 2 0 01-1.98-1.75L3 3z"
+                  {/* Product Image */}
+                  <div className="image mb-3">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-48 object-cover mx-auto"
                     />
-                  </svg>
-                  Add to Cart
-                </button>
-              </div>
+                  </div>
+
+                  {/* Product Title */}
+                  <div className="title">
+                    <h1 className="font-bold text-center">
+                      {item.title
+                        ? `${item.title.substring(0, 20)}...`
+                        : "Default Title"}
+                    </h1>
+                  </div>
+
+                  {/* Product Price */}
+                  <p className="text-center text-lg">${item.price}</p>
+
+                  {/* Add to Cart Button */}
+                  <div className="button mt-3 text-center">
+                    <button
+                      onClick={() => addToCartHandler(item)}
+                      className={`w-[200px] mt-4 py-2 px-4 rounded-full font-bold 
+            ${
+              isToggled
+                ? "bg-red-500 hover:bg-red-700 text-white"
+                : "bg-red-500 hover:bg-red-700 text-gray-300"
+            }`}
+                    >
+                      Add to Cart
+                    </button>
+
+                    <button onClick={() => navigate(`/products/${item.id}`)}>
+                      More Details
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

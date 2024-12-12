@@ -6,7 +6,6 @@ import { MdDarkMode } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "../../Redux/slice";
 
-
 function Navbar() {
   const dispatch = useDispatch();
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
@@ -23,16 +22,16 @@ function Navbar() {
   return (
     <div>
       <nav
-        className={`h-[70px] ${
+        className={`h-[70px] shadow-custom-shadow relative z-99 ${
           isToggled ? "bg-white text-black" : "bg-black text-white"
         } transition-all duration-300 ease-in-out border-gray-200 dark:bg-gray-900`}
       >
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <div className="logo">
-        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-        ReduxStore
+          <div className="logo">
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              ReduxStore
             </span>
-        </div>
+          </div>
 
           <button
             data-collapse-toggle="navbar-default"
