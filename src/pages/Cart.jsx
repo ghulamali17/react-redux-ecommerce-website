@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { removeItem, clearCart, increment, decrement } from "../Redux/slice";
 import { IoAddCircle } from "react-icons/io5";
 import { IoIosRemoveCircle } from "react-icons/io";
+import Button from "../components/Button";
 
 function Cart() {
   const cartData = useSelector((state) => state.myCart?.cartItems || []);
@@ -47,12 +48,8 @@ function Cart() {
 
       {cartData.length > 0 && (
         <div className="text-center mb-4">
-          <button
-            onClick={clearCartHandler}
-            className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"
-          >
-            Clear Cart
-          </button>
+        
+          <Button click={clearCartHandler} title={'Clear Cart'} classname={'bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300'}/>
         </div>
       )}
 
@@ -161,9 +158,7 @@ function Cart() {
             </tr>
           </tbody>
         </table>
-        <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 mt-4 px-4 rounded-lg shadow-md transition-all duration-300">
-          Proceed to Checkout
-        </button>
+        <Button title={'Proceed to Checkout'} classname={'bg-red-500 hover:bg-red-700 text-white font-semibold py-2 mt-4 px-4 rounded-lg shadow-md transition-all duration-300'}/>
       </div>
     </div>
   );

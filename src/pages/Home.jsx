@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Redux/slice";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -88,17 +89,14 @@ function Home() {
 
                   {/* Add to Cart Button */}
                   <div className="button mt-3 text-center">
-                    <button
-                      onClick={() => addToCartHandler(item)}
-                      className={`w-[200px] mt-4 py-2 px-4 rounded-full font-bold 
+                    
+                    <Button click={() => addToCartHandler(item)} title={'Add to cart'} classname={`w-[200px] mt-4 py-2 px-4 rounded-full font-bold 
             ${
               isToggled
                 ? "bg-red-500 hover:bg-red-700 text-white"
                 : "bg-red-500 hover:bg-red-700 text-gray-300"
-            }`}
-                    >
-                      Add to Cart
-                    </button>
+            }`} 
+                    />
 
                     <button onClick={() => navigate(`/products/${item.id}`)}>
                       More Details
@@ -115,3 +113,17 @@ function Home() {
 }
 
 export default Home;
+
+
+
+{/* <button
+                      onClick={() => addToCartHandler(item)}
+                      className={`w-[200px] mt-4 py-2 px-4 rounded-full font-bold 
+            ${
+              isToggled
+                ? "bg-red-500 hover:bg-red-700 text-white"
+                : "bg-red-500 hover:bg-red-700 text-gray-300"
+            }`}
+                    >
+                      Add to Cart
+                    </button> */}

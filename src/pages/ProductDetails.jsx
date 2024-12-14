@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import Loading from "./Loading";
+import { Link, useParams } from "react-router-dom";
+import Loading from "../components/Loading";
 import { addToCart } from "../Redux/slice";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
+  const [similarProduct, setSimilarProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
   const params = useParams();
@@ -15,19 +17,30 @@ const ProductDetails = () => {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
 
   // Fetch Product Details
-  useEffect(() => {
-    const getProd = async () => {
-      try {
-        const res = await axios(
-          `https://fakestoreapi.com/products/${params.id}`
-        );
-        setProduct(res.data);
-      } catch (error) {
-        console.error("Error fetching product:", error);
-      }
-    };
-    getProd();
-  }, [params.id]);
+  const getProd = async () => {
+    setLoading(true);
+    try {
+      const res = await axios(`https://fakestoreapi.com/products/${params.id}`);
+      setProduct(res.data);
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch Similar Products
+  const getSimilarProduct = async () => {
+    if (!product) return;
+    try {
+      const res = await axios(
+        `https://fakestoreapi.com/products/category/${product.category}`
+      );
+      setSimilarProduct(res.data);
+    } catch (error) {
+      console.error("Error fetching similar products:", error);
+    }
+  };
 
   // Add to Cart Handler
   const addToCartHandler = (item) => {
@@ -42,13 +55,20 @@ const ProductDetails = () => {
     alert("Product Added to Cart");
   };
 
-  if (!product) {
-    return <Loading />;
-  }
+  useEffect(() => {
+    getProd();
+  }, [params.id]);
 
+  useEffect(() => {
+    getSimilarProduct();
+  }, [product]);
   const themeClasses = isToggled
     ? "bg-white text-black"
     : "bg-black text-white";
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div
@@ -63,6 +83,21 @@ const ProductDetails = () => {
                 src={product.image}
                 alt={product.title}
               />
+            </div>
+            <h3 className="text-lg font-bold mb-2">Similar Products:</h3>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {similarProduct.map((item) => (
+                <div key={item.id} className="border rounded-lg p-2">
+                  <Link to={`/products/${item.id}`}>
+                    <img
+                      className="w-full h-32 object-cover"
+                      src={item.image}
+                      alt={item.title}
+                    />
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
           <div className={`md:flex-1 px-4 ${themeClasses}`}>
@@ -97,20 +132,29 @@ const ProductDetails = () => {
                   ${product.price}
                 </span>
               </div>
-              <div>
+              <div className="flex flex-col">
+                <div>
+                  <span
+                    className={`font-bold ${
+                      isToggled ? "text-gray-900" : "text-gray-300"
+                    }`}
+                  >
+                    Availability:
+                  </span>
+                  <span
+                    className={`ml-2 ${
+                      isToggled ? "text-gray-700" : "text-gray-400"
+                    }`}
+                  >
+                    In Stock
+                  </span>
+                </div>
                 <span
                   className={`font-bold ${
                     isToggled ? "text-gray-900" : "text-gray-300"
                   }`}
                 >
-                  Availability:
-                </span>
-                <span
-                  className={`ml-2 ${
-                    isToggled ? "text-gray-700" : "text-gray-400"
-                  }`}
-                >
-                  In Stock
+                  Category: {product.category}
                 </span>
               </div>
               <button
