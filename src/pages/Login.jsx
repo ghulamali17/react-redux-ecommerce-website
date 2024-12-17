@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../components/Firebase/firebase";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+// import { getAuth } from "firebase/auth";
 const auth = getAuth(app);
 
 function Login() {
@@ -24,7 +24,17 @@ function Login() {
       .catch((err) => alert("Wrong Email or Password: " + err.message));
   };
 
-  useEffect(() => {}, []);
+  const auth = getAuth();
+  const user = auth.currentUser;
+  console.log(user);
+
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/auth.user
+    // ...
+  } else {
+    // No user is signed in.
+  }
 
   return (
     <div
@@ -39,7 +49,11 @@ function Login() {
             src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+          <h2
+            className={` mt-10 text-center text-2xl/9 font-bold tracking-tight ${
+              isToggled ? "bg-white text-gray-900 " : "bg-gray-800 text-white"
+            } transition-all duration-300 ease-in-out`}
+          >
             Sign in to your account
           </h2>
         </div>
@@ -53,7 +67,11 @@ function Login() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm/6 font-medium text-gray-900"
+                className={` block text-sm/6 font-medium  ${
+                  isToggled
+                    ? "bg-white text-gray-900"
+                    : "bg-gray-800 text-white"
+                } transition-all duration-300 ease-in-out`}
               >
                 Email address
               </label>
@@ -74,7 +92,11 @@ function Login() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm/6 font-medium text-gray-900"
+                  className={` block text-sm/6 font-medium  ${
+                    isToggled
+                      ? "bg-white text-gray-900"
+                      : "bg-gray-800 text-white"
+                  } transition-all duration-300 ease-in-out`}
                 >
                   Password
                 </label>
