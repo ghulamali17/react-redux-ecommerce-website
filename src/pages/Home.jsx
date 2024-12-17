@@ -6,6 +6,7 @@ import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
+
 function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,6 +20,7 @@ function Home() {
   useEffect(() => {
     myResponse();
   }, []);
+
 
   // Fetch Product Data
   const myResponse = async () => {
@@ -89,13 +91,15 @@ function Home() {
 
                   {/* Add to Cart Button */}
                   <div className="button mt-3 text-center">
-                    
-                    <Button click={() => addToCartHandler(item)} title={'Add to cart'} classname={`w-[200px] mt-4 py-2 px-4 rounded-full font-bold 
+                    <Button
+                      click={() => addToCartHandler(item)}
+                      title={"Add to cart"}
+                      classname={`w-[200px] mt-4 py-2 px-4 rounded-full font-bold 
             ${
               isToggled
                 ? "bg-red-500 hover:bg-red-700 text-white"
                 : "bg-red-500 hover:bg-red-700 text-gray-300"
-            }`} 
+            }`}
                     />
 
                     <button onClick={() => navigate(`/products/${item.id}`)}>
@@ -113,17 +117,3 @@ function Home() {
 }
 
 export default Home;
-
-
-
-{/* <button
-                      onClick={() => addToCartHandler(item)}
-                      className={`w-[200px] mt-4 py-2 px-4 rounded-full font-bold 
-            ${
-              isToggled
-                ? "bg-red-500 hover:bg-red-700 text-white"
-                : "bg-red-500 hover:bg-red-700 text-gray-300"
-            }`}
-                    >
-                      Add to Cart
-                    </button> */}

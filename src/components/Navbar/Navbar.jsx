@@ -42,23 +42,25 @@ function Navbar() {
             aria-expanded="false"
             onClick={toggleMenuHandler}
           >
-            {isMenuOpen ? <IoClose className="text-2xl"/> :
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-}
+            {isMenuOpen ? (
+              <IoClose className="text-2xl" />
+            ) : (
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            )}
           </button>
 
           <div
@@ -67,7 +69,11 @@ function Navbar() {
             } w-full md:block md:w-auto`}
             id="navbar-default"
           >
-            <ul className={`font-medium flex items-center flex-col p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 ${isMenuOpen ? 'bg-white text-black': ''}  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-white`}>
+            <ul
+              className={`font-medium flex items-center flex-col p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 ${
+                isMenuOpen ? "bg-white text-black" : ""
+              }  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-white`}
+            >
               <li>
                 <Link
                   to="/"
@@ -79,9 +85,19 @@ function Navbar() {
               <li className="flex items-center space-x-2">
                 <Link
                   to="/cart"
-                  className={`flex items-center gap-2 py-2 px-3 ${isMenuOpen ? 'bg-white text-black': ''}  md:p-0 dark:text-white md:dark:text-blue-500`
-                  }>
+                  className={`flex items-center gap-2 py-2 px-3 ${
+                    isMenuOpen ? "bg-white text-black" : ""
+                  }  md:p-0 dark:text-white md:dark:text-blue-500`}
+                >
                   Cart <FaShoppingBag size={20} />
+                </Link>
+                <Link
+                  to="/login"
+                  className={`flex items-center gap-2 py-2 px-3 ${
+                    isMenuOpen ? "bg-white text-black" : ""
+                  }  md:p-0 dark:text-white md:dark:text-blue-500`}
+                >
+                  Login
                 </Link>
               </li>
               <li
