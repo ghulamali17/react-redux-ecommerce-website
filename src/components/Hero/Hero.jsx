@@ -1,11 +1,44 @@
-import React from 'react'
+import React from "react";
+import Button from "../Button";
+// import Brand from "../brand";
+// import heroImage from '../assets/hero-img.png';
+
 
 function Hero() {
   return (
     <div>
-      
+      <section className="hero max-w-[1300px] mx-auto mt-10 bg-[#F4F6F5]  rounded-[30px]">
+        <div className="hero-content grid md:grid-cols-2 xs:grid-cols-1 gap-6 md:gap-12">
+          <div className="hero-left-content md:px-[100px] md:py-[60px] xs:px-[18px] xs:py-[20px]">
+            <h1 className="font-poppins font-bold md:text-7xl xs:text-5xl leading-tight">
+              <span className="block bg-[#FFFFFF] p-3 md:p-4 rounded-sm">
+                LET’S
+              </span>
+              <span className="block">EXPLORE</span>
+              <span className="block bg-primaryColor p-3 md:p-4 rounded-sm">
+                UNIQUE
+              </span>
+              <span className="block">CLOTHES.</span>
+            </h1>
+
+            <p className="mt-4 text-lg">
+              Live for Influential and Innovative fashion!
+            </p>
+            <Button title={'SHOP NOW'} classname={"bg-black text-center p-3 text-white mt-6 hover:bg-gray-800"}/>
+            
+          </div>
+
+          <div className="hero-right-content flex justify-center items-center">
+            <img
+              src="./assets/hero.png"
+              alt="Hero Section"
+              className="w-full object-contain md:h-[600px]"
+            />
+          </div>
+        </div>
+      </section>
     </div>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

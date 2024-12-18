@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../components/Firebase/firebase";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-// import { getAuth } from "firebase/auth";
+import { useSelector, useDispatch } from "react-redux";
+// import { setUser } from "../redux/slice";
+
 const auth = getAuth(app);
 
 function Login() {
@@ -12,29 +13,20 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
+
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const signInUser = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((value) => {
-        console.log("Login successful");
+        // const user = value.user;
+        // dispatch(setUser(user));
         navigate("/");
       })
-      .catch((err) => alert("Wrong Email or Password: " + err.message));
+      .catch((err) => alert(`Wrong Email or Password: ${err.message}`));
   };
-
-  const auth = getAuth();
-  const user = auth.currentUser;
-  console.log(user);
-
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/auth.user
-    // ...
-  } else {
-    // No user is signed in.
-  }
 
   return (
     <div
@@ -50,9 +42,9 @@ function Login() {
             alt="Your Company"
           />
           <h2
-            className={` mt-10 text-center text-2xl/9 font-bold tracking-tight ${
-              isToggled ? "bg-white text-gray-900 " : "bg-gray-800 text-white"
-            } transition-all duration-300 ease-in-out`}
+            className={`mt-10 text-center text-2xl font-bold tracking-tight ${
+              isToggled ? "text-gray-900" : "text-white"
+            }`}
           >
             Sign in to your account
           </h2>
@@ -60,18 +52,14 @@ function Login() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form
             className="space-y-6"
-            action="#"
-            method="POST"
             onSubmit={signInUser}
           >
             <div>
               <label
                 htmlFor="email"
-                className={` block text-sm/6 font-medium  ${
-                  isToggled
-                    ? "bg-white text-gray-900"
-                    : "bg-gray-800 text-white"
-                } transition-all duration-300 ease-in-out`}
+                className={`block text-sm font-medium ${
+                  isToggled ? "text-gray-900" : "text-white"
+                }`}
               >
                 Email address
               </label>
@@ -80,62 +68,48 @@ function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   type="email"
-                  name="email"
                   id="email"
                   autoComplete="email"
-                  required=""
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  required
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 placeholder-gray-400 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600"
                 />
               </div>
             </div>
             <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className={` block text-sm/6 font-medium  ${
-                    isToggled
-                      ? "bg-white text-gray-900"
-                      : "bg-gray-800 text-white"
-                  } transition-all duration-300 ease-in-out`}
-                >
-                  Password
-                </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
+              <label
+                htmlFor="password"
+                className={`block text-sm font-medium ${
+                  isToggled ? "text-gray-900" : "text-white"
+                }`}
+              >
+                Password
+              </label>
               <div className="mt-2">
                 <input
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   type="password"
-                  name="password"
                   id="password"
                   autoComplete="current-password"
-                  required=""
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  required
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 placeholder-gray-400 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600"
                 />
               </div>
             </div>
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-white shadow-sm hover:bg-indigo-500 focus:outline focus:outline-2 focus:outline-indigo-600"
               >
                 Sign in
               </button>
             </div>
           </form>
-          <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Not have an account?
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Not have an account?{" "}
             <Link
+              to="/signup"
               className="font-semibold text-indigo-600 hover:text-indigo-500"
-              to={"/signup"}
             >
               Sign Up
             </Link>

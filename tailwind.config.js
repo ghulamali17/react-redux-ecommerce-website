@@ -16,6 +16,9 @@ export default {
         medium: "500",
         regular: "400",
       },
+      colors: {
+        primaryColor: '#EBD96B',
+      },
     },
   },
   plugins: [],

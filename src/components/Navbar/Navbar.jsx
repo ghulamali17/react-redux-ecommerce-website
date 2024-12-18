@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { CiDark } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
-import { toggle } from "../../Redux/slice";
+import { toggle } from "../../redux/slice";
 import { useSelector } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
 import { Navigate } from "react-router-dom";
+import { clearUser } from "../../redux/slice";
 
 function Navbar() {
   const Navigate = useNavigate();
@@ -35,16 +36,24 @@ function Navbar() {
   //   Sign out
   const logOutHandler = () => {
     signOut(auth)
-      .then(() => {
-        alert("You have successfully logged out. Please log in again.");
-        Navigate("/login");
-      })
-      .catch((error) => {
-        const errorMessage =
-          error.message ||
-          "An error occurred while logging out. Please try again.";
-        alert(errorMessage);
-      });
+    .then(() => {
+      // Clear user data from Redux
+      dispatch(clearUser());
+
+      // Remove user data from localStorage
+      localStorage.removeItem("user");
+
+      alert("You have successfully logged out. Please log in again.");
+
+      // Redirect to the login page
+      Navigate("/login");
+    })
+    .catch((error) => {
+      const errorMessage =
+        error.message || "An error occurred while logging out. Please try again.";
+      alert(errorMessage);
+    });
+
   };
 
   return (
@@ -63,7 +72,8 @@ function Navbar() {
         <button>
           <i
             onClick={toggleMenuHandler}
-            className={`fa-solid fa-bars md:hidden  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-white  text-2xl`}
+            className={`fa-solid fa-bars md:hidden  dark:bg-gray-800
+               md:dark:bg-gray-900 dark:border-gray-700 dark:text-white  text-2xl`}
           ></i>
         </button>
 

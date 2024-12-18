@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const cardSlice = createSlice({
+const slice = createSlice({
   name: "cart",
   initialState: {
     cartItems: [],
     toggle: false,
+    user: null,  // Store user details here
   },
   reducers: {
     addToCart: (state, action) => {
@@ -38,6 +39,12 @@ const cardSlice = createSlice({
     toggle: (state) => {
       state.toggle = !state.toggle;
     },
+    setUser: (state, action) => {
+      state.user = action.payload;  // Set the user details
+    },
+    clearUser: (state) => {
+      state.user = null;  // Clear user details on logout
+    },
   },
 });
 
@@ -48,5 +55,8 @@ export const {
   increment,
   decrement,
   toggle,
-} = cardSlice.actions;
-export default cardSlice;
+  setUser,  // Export the setUser action
+  clearUser,  // Export the clearUser action
+} = slice.actions;
+
+export default slice;
