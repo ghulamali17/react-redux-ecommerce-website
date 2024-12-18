@@ -90,7 +90,6 @@ function SignUP() {
                       ? "bg-white text-gray-700 "
                       : "bg-gray-800 text-black"
                   } transition-all duration-300 ease-in-out`}
-                 
                 />
                 <div className="hidden absolute inset-y-0 right-0 pr-3 items-center pointer-events-none">
                   <svg

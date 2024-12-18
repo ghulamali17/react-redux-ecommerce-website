@@ -5,7 +5,7 @@ import { addToCart } from "../Redux/slice";
 import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
-
+import { getAuth } from "firebase/auth";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -21,7 +21,17 @@ function Home() {
     myResponse();
   }, []);
 
+  // Getting Current User Firebase
+  const auth = getAuth();
+  const user = auth.currentUser;
+  
+  if (user !== null) {
+    const email = user.email;
 
+    const uid = user.uid;
+  }
+  
+  
   // Fetch Product Data
   const myResponse = async () => {
     try {
@@ -35,10 +45,16 @@ function Home() {
 
   // Add to Cart
   const addToCartHandler = (items) => {
+    if (!user) {
+      alert("Login to Add Products");
+      return;
+    }
     const existingProduct = cartData.find((item) => item.id === items.id);
     if (existingProduct) {
       alert("Product Already Exists");
       return;
+    }else if(!user){
+      alert("Login to Add Products")
     }
     dispatch(addToCart(items));
     alert("Product Added to Cart");

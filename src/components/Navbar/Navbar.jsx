@@ -1,114 +1,105 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaShoppingBag } from "react-icons/fa";
+import { React, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { CiDark } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "../../Redux/slice";
-import { IoClose } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { getAuth, signOut } from "firebase/auth";
+import { Navigate } from "react-router-dom";
 
 function Navbar() {
+  const Navigate = useNavigate();
   const dispatch = useDispatch();
+
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleThemeHandler = () => {
     dispatch(toggle());
   };
-
   const toggleMenuHandler = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Getting Current User Firebase
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if (user !== null) {
+    const email = user.email;
+    console.log(email);
+
+    const uid = user.uid;
+  }
+
+  //   Sign out
+  const logOutHandler = () => {
+    signOut(auth)
+      .then(() => {
+        alert("You have successfully logged out. Please log in again.");
+        Navigate("/login");
+      })
+      .catch((error) => {
+        const errorMessage =
+          error.message ||
+          "An error occurred while logging out. Please try again.";
+        alert(errorMessage);
+      });
+  };
+
   return (
-    <div>
+    <div className="">
       <nav
-        className={`h-[70px] shadow-custom-shadow relative z-99 ${
-          isToggled ? "bg-white text-black" : "bg-black text-white"
+        className={`h-[100px] flex justify-around items-center font-poppins font-medium shadow-custom-shadow ${
+          isToggled ? "bg-white text-black" : "bg-black text-white "
         } transition-all duration-300 ease-in-out border-gray-200 dark:bg-gray-900`}
       >
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <div className="logo">
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              ReduxStore
-            </span>
-          </div>
-
-          <button
-            data-collapse-toggle="navbar-default"
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-            onClick={toggleMenuHandler}
-          >
-            {isMenuOpen ? (
-              <IoClose className="text-2xl" />
-            ) : (
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
-              </svg>
-            )}
-          </button>
-
-          <div
-            className={`${
-              isMenuOpen ? "block" : "hidden"
-            } w-full md:block md:w-auto`}
-            id="navbar-default"
-          >
-            <ul
-              className={`font-medium flex items-center flex-col p-4 md:p-0 mt-4 border  rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 ${
-                isMenuOpen ? "bg-white text-black" : ""
-              }  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-white`}
-            >
-              <li>
-                <Link
-                  to="/"
-                  className="block py-2 px-3  rounded md:bg-transparent   md:p-0 dark:text-white "
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="flex items-center space-x-2">
-                <Link
-                  to="/cart"
-                  className={`flex items-center gap-2 py-2 px-3 ${
-                    isMenuOpen ? "bg-white text-black" : ""
-                  }  md:p-0 dark:text-white md:dark:text-blue-500`}
-                >
-                  Cart <FaShoppingBag size={20} />
-                </Link>
-                <Link
-                  to="/login"
-                  className={`flex items-center gap-2 py-2 px-3 ${
-                    isMenuOpen ? "bg-white text-black" : ""
-                  }  md:p-0 dark:text-white md:dark:text-blue-500`}
-                >
-                  Login
-                </Link>
-              </li>
-              <li
-                className="cursor-pointer text-xl flex items-center"
-                onClick={toggleThemeHandler}
-              >
-                {isToggled ? <CiDark /> : <MdDarkMode />}
-              </li>
-            </ul>
-          </div>
+        <div className="logo">
+          <h1 className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white"'>
+            Logo
+          </h1>
         </div>
+
+        <button>
+          <i
+            onClick={toggleMenuHandler}
+            className={`fa-solid fa-bars md:hidden  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-white  text-2xl`}
+          ></i>
+        </button>
+
+        <ul className="uppercase hidden md:flex gap-10 md:flex-row ">
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
+
+          <li>
+            <Link to={"/"}>Products</Link>
+          </li>
+          {user && (
+            <li>
+              <Link to="/cart">Cart</Link>
+            </li>
+          )}
+
+          {!user ? (
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+          ) : (
+            <li>
+              <Link onClick={logOutHandler} to="/logout">
+                Log Out
+              </Link>
+            </li>
+          )}
+
+          <li
+            className="cursor-pointer text-xl flex items-center"
+            onClick={toggleThemeHandler}
+          >
+            {isToggled ? <CiDark /> : <MdDarkMode />}
+          </li>
+        </ul>
       </nav>
     </div>
   );

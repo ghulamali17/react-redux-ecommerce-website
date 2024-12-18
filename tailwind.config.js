@@ -7,7 +7,14 @@ export default {
         xs: "320px",
       },
       boxShadow: {
-        "custom-shadow": "rgba(0, 0, 0, 0.35) 0px 5px 15px;",
+        "custom-shadow": "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+      },
+      fontFamily: {
+        poppins: ['"Poppins"', "sans-serif"], 
+      },
+      fontWeight: {
+        medium: "500",
+        regular: "400",
       },
     },
   },

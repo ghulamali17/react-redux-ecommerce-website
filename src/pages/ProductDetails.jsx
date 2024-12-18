@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import { addToCart } from "../Redux/slice";
+import { getAuth } from "firebase/auth";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
@@ -44,6 +45,10 @@ const ProductDetails = () => {
 
   // Add to Cart Handler
   const addToCartHandler = (item) => {
+    if (!user) {
+      alert("Login to Add Products");
+      return;
+    }
     const existingProduct = cartData.find(
       (cartItem) => cartItem.id === item.id
     );
@@ -54,6 +59,15 @@ const ProductDetails = () => {
     dispatch(addToCart(item));
     alert("Product Added to Cart");
   };
+
+  // Getting Current User Firebase
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (user !== null) {
+    const email = user.email;
+    const uid = user.uid;
+  }
 
   useEffect(() => {
     getProd();
