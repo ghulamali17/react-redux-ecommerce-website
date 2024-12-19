@@ -1,15 +1,12 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Cart from "./pages/Cart";
-// import Home from "./pages/Products";
 import AppLayout from "./components/AppLayOut";
 import ProductDetails from "./pages/ProductDetails";
 import Login from "./pages/Login";
 import SignUP from "./pages/SignUP";
-// import Hero from "./components/Hero/Hero";
 import Home from "./pages/Home";
-import Products from "./pages/Products";
-
+import Shop from "./pages/Shop";
 
 function AppRouter() {
   const appRoute = createBrowserRouter([
@@ -39,7 +36,7 @@ function AppRouter() {
         },
         {
           path: "/shop",
-          element: <Products />,
+          element: <Shop />,
         },
       ],
     },

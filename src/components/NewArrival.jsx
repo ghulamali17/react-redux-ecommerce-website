@@ -27,7 +27,7 @@ function NewArrival() {
                 isToggled ? "text-[#191919]" : "text-white"
               } z-10 relative`}
             >
-              NEW ARRIVALS
+            MEN FASHION
             </h1>
           </div>
 
@@ -36,22 +36,22 @@ function NewArrival() {
               classname={`text-xl font-poppins mt-3 ${
                 isToggled ? "text-[#191919]" : "text-white"
               }`}
-              img="./assets/m1.png"
-              text="Hoodies & Sweatshirts"
+              img="./assets/fashion1.png"
+              text="Casual Classics"
             />
             <NewArrBox
-              classname={`text-xl font-poppins mt-3 ${
+              classname={`text-xl font-poppins  mt-3 ${
                 isToggled ? "text-[#191919]" : "text-white"
               }`}
-              img="./assets/m1.png"
-              text="Coats & Parkas"
+              img="./assets/fashion2.png"
+              text="Smart Formals"
             />
             <NewArrBox
-              classname={`text-xl font-poppins mt-3 ${
+              classname={`text-xl font-poppins  mt-3 ${
                 isToggled ? "text-[#191919]" : "text-white"
               }`}
-              img="./assets/m1.png"
-              text="Tees & T-Shirts"
+              img="./assets/fashion3.png"
+              text="Contemporary Wear"
             />
           </div>
         </div>

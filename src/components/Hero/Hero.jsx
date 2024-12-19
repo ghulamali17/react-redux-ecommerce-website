@@ -1,9 +1,11 @@
 import React from "react";
 import Button from "../Button";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
+  const navigate=useNavigate();
   return (
     <div
       className={`md:p-12 ${
@@ -32,11 +34,10 @@ function Hero() {
               Live for Influential and Innovative fashion!
             </p>
             <Button
-              title={"SHOP NOW"}
-              classname={
-                "bg-black text-center p-3 text-white mt-6 hover:bg-gray-800"
-              }
-            />
+      title={"SHOP NOW"}
+      classname={"bg-black text-center p-3 text-white mt-6 hover:bg-gray-800"}
+      click={() => navigate('/shop')} 
+    />
           </div>
 
           <div className="hero-right-content flex justify-center items-center">

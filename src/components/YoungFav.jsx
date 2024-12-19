@@ -16,7 +16,7 @@ function YoungFav() {
             isToggled ? "text-white" : "bg-gray-800 text-white"
           } transition-all duration-300 ease-in-out`}
         >
-            <div className="relative">
+          <div className="relative">
             <img
               src="./assets/design.svg"
               className="absolute top-[70%] left-[20%] z-0"
@@ -27,22 +27,29 @@ function YoungFav() {
                 isToggled ? "text-[#191919]" : "text-white"
               } z-10 relative`}
             >
-                Young’s Favourite
+             BEST FITS FOR YOU
             </h1>
           </div>
-          <div className="content grid md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 mt-10 gap-6 justify-center">
+          <div className="content grid md:grid-cols-3 sm:grid-cols-1 xs:grid-cols-1 mt-10 gap-6 justify-center">
             <YoungFavBox
               classname={`text-xl font-poppins mt-3 ${
                 isToggled ? "text-[#7F7F7F]" : "text-white"
               }`}
-              img="./assets/young1.png"
+              img="./assets/fav1.png"
               text="Hoodies & Sweetshirt"
             />
             <YoungFavBox
               classname={`text-xl font-poppins mt-3  ${
                 isToggled ? "text-[#7F7F7F]" : "text-white"
               }`}
-              img="./assets/young2.png"
+              img="./assets/fav3.png"
+              text="Coats & Parkas"
+            />
+            <YoungFavBox
+              classname={`text-xl font-poppins mt-3  ${
+                isToggled ? "text-[#7F7F7F]" : "text-white"
+              }`}
+              img="./assets/fav.png"
               text="Coats & Parkas"
             />
           </div>
