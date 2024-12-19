@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
-import { addToCart } from "../Redux/slice";
+import { addToCart } from "../redux/slice";
 import { getAuth } from "firebase/auth";
 
 const ProductDetails = () => {
@@ -78,7 +78,7 @@ const ProductDetails = () => {
   }, [product]);
   const themeClasses = isToggled
     ? "bg-white text-black"
-    : "bg-black text-white";
+    : "bg-gray-800 text-white";
 
   if (loading) {
     return <Loading />;
@@ -86,7 +86,7 @@ const ProductDetails = () => {
 
   return (
     <div
-      className={`py-8 ${themeClasses} transition-all duration-300 ease-in-out`}
+      className={`py-8  relative z-10 font-poppins ${themeClasses} transition-all duration-300 ease-in-out`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row -mx-4">

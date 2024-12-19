@@ -3,16 +3,16 @@ import Button from "./Button";
 import { useSelector } from "react-redux";
 
 function Form() {
- 
+  const isToggled = useSelector((state) => state.myCart?.toggle || false);
   return (
-    <div>
+    <div className={`${isToggled ? "text-white" : "text-black"}`}>
       <section className="form bg-[#E5C643] flex items-center  justify-center md:p-[70px] xs:p-6 text-center flex-col">
-        <h1 className="text-white font-poppins font-bold md:text-6xl xs:text-2xl leading-tight">
+        <h1 className=" font-poppins font-bold md:text-6xl xs:text-2xl leading-tight">
           <span className="block">JOIN SHOPPING COMMUNITY TO</span>
 
           <span className="block"> GET MONTHLY PROMO</span>
         </h1>
-        <p className="text-[#FFFCF8] text-xl mt-5">
+        <p className=" text-xl mt-5">
           Type your email down below and be young wild generation
         </p>
 

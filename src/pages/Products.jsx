@@ -59,7 +59,7 @@ function Products() {
         <Loading />
       ) : (
         <div
-          className={`pt-5 ${
+          className={`pt-5 font-poppins ${
             isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
           } transition-all duration-300 ease-in-out`}
         >

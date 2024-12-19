@@ -57,7 +57,7 @@ function Navbar() {
       <nav
         className={`h-[100px] flex justify-around items-center font-poppins font-medium shadow-custom-shadow  ${
           isToggled ? "bg-white text-black" : "bg-black text-white "
-        } transition-all duration-300 ease-in-out border-gray-200 dark:bg-gray-900`}
+        } transition-all duration-300 ease-in-out border-gray-200 dark:bg-gray-900 `}
       >
         <div className="logo">
           <h1 className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white"'>
@@ -79,7 +79,7 @@ function Navbar() {
           </li>
 
           <li>
-            <Link to={"/"}>Products</Link>
+            <Link to={"/shop"}>Products</Link>
           </li>
           {user && (
             <li>

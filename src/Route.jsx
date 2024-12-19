@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import SignUP from "./pages/SignUP";
 // import Hero from "./components/Hero/Hero";
 import Home from "./pages/Home";
+import Products from "./pages/Products";
 
 
 function AppRouter() {
@@ -35,6 +36,10 @@ function AppRouter() {
         {
           path: "/signup",
           element: <SignUP />,
+        },
+        {
+          path: "/shop",
+          element: <Products />,
         },
       ],
     },
