@@ -6,7 +6,7 @@ import { MdDarkMode } from "react-icons/md";
 import { toggle } from "../../redux/slice";
 import { useSelector } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
-import { Navigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { clearUser } from "../../redux/slice";
 
 function Navbar() {
@@ -33,33 +33,29 @@ function Navbar() {
     const uid = user.uid;
   }
 
-  //   Sign out
   const logOutHandler = () => {
     signOut(auth)
-    .then(() => {
-      // Clear user data from Redux
-      dispatch(clearUser());
+      .then(() => {
+        dispatch(clearUser());
 
-      // Remove user data from localStorage
-      localStorage.removeItem("user");
+        localStorage.removeItem("user");
 
-      alert("You have successfully logged out. Please log in again.");
+        alert("You have successfully logged out. Please log in again.");
 
-      // Redirect to the login page
-      Navigate("/login");
-    })
-    .catch((error) => {
-      const errorMessage =
-        error.message || "An error occurred while logging out. Please try again.";
-      alert(errorMessage);
-    });
-
+        Navigate("/login");
+      })
+      .catch((error) => {
+        const errorMessage =
+          error.message ||
+          "An error occurred while logging out. Please try again.";
+        alert(errorMessage);
+      });
   };
 
   return (
-    <div className="">
+    <div>
       <nav
-        className={`h-[100px] flex justify-around items-center font-poppins font-medium shadow-custom-shadow ${
+        className={`h-[100px] flex justify-around items-center font-poppins font-medium shadow-custom-shadow  ${
           isToggled ? "bg-white text-black" : "bg-black text-white "
         } transition-all duration-300 ease-in-out border-gray-200 dark:bg-gray-900`}
       >

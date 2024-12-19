@@ -1,15 +1,22 @@
 import React from "react";
 import Button from "../Button";
-// import Brand from "../brand";
-// import heroImage from '../assets/hero-img.png';
-
+import { useSelector } from "react-redux";
 
 function Hero() {
+  const isToggled = useSelector((state) => state.myCart?.toggle || false);
   return (
-    <div>
-      <section className="hero max-w-[1300px] mx-auto mt-10 bg-[#F4F6F5]  rounded-[30px]">
+    <div
+      className={`md:p-12 ${
+        isToggled ? " text-black" : "bg-gray-800 text-white"
+      } transition-all duration-300 ease-in-out`}
+    >
+      <section className="hero max-w-[1300px] mx-auto bg-[#F4F6F5]  rounded-[30px] border border-black">
         <div className="hero-content grid md:grid-cols-2 xs:grid-cols-1 gap-6 md:gap-12">
-          <div className="hero-left-content md:px-[100px] md:py-[60px] xs:px-[18px] xs:py-[20px]">
+          <div
+            className={`hero-left-content md:px-[100px] md:py-[60px] xs:px-[18px] xs:py-[20px] ${
+              isToggled ? " text-black" : " text-black"
+            } transition-all duration-300 ease-in-out`}
+          >
             <h1 className="font-poppins font-bold md:text-7xl xs:text-5xl leading-tight">
               <span className="block bg-[#FFFFFF] p-3 md:p-4 rounded-sm">
                 LET’S
@@ -24,8 +31,12 @@ function Hero() {
             <p className="mt-4 text-lg">
               Live for Influential and Innovative fashion!
             </p>
-            <Button title={'SHOP NOW'} classname={"bg-black text-center p-3 text-white mt-6 hover:bg-gray-800"}/>
-            
+            <Button
+              title={"SHOP NOW"}
+              classname={
+                "bg-black text-center p-3 text-white mt-6 hover:bg-gray-800"
+              }
+            />
           </div>
 
           <div className="hero-right-content flex justify-center items-center">

@@ -6,7 +6,7 @@ function NewArrBox(props) {
     <div>
       <div className="card">
        <img src={props.img} alt="" />
-       <p className='text-xl font-poppins mt-3 text-[#191919]'>{props.text}</p>
+       <p className={props.classname}>{props.text}</p>
        <Link className='text-[#7F7F7F] mt-3 text-xl' to={'/products'}>Explore Now</Link>
       </div>
     </div>
