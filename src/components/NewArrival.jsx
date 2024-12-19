@@ -16,17 +16,17 @@ function NewArrival() {
         <div className="content grid md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mt-10 gap-6 justify-center">
           <NewArrBox
             classname={`text-xl font-poppins mt-3 ${isToggled ? "text-[#191919]" : "text-white"}`}
-            img="./assets/img-new2.png"
+            img="./assets/m1.png"
             text="Hoodies & Sweatshirts"
           />
           <NewArrBox
             classname={`text-xl font-poppins mt-3 ${isToggled ? "text-[#191919]" : "text-white"}`}
-            img="./assets/img-new2.png"
+            img="./assets/m1.png"
             text="Coats & Parkas"
           />
           <NewArrBox
             classname={`text-xl font-poppins mt-3 ${isToggled ? "text-[#191919]" : "text-white"}`}
-            img="./assets/img-new2.png"
+            img="./assets/m1.png"
             text="Tees & T-Shirts"
           />
         </div>

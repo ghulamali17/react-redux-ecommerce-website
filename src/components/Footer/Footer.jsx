@@ -1,175 +1,73 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import { FaFacebook, FaInstagram, FaTwitter, FaGithub } from 'react-icons/fa';
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter, FaGithub } from "react-icons/fa";
 
 function Footer() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
+
   return (
     <div>
       <footer
-        className={` ${
-          isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
-        } transition-all duration-300 ease-in-out`}
+       className="bg-black text-white"
       >
         <div className="mx-auto w-full max-w-screen-xl">
-          <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 px-4 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:py-8">
             <div>
-              <h2
-                className={`mb-6 text-sm font-semibold  uppercase dark:text-white ${
-                  isToggled
-                    ? "bg-white text-gray-900"
-                    : "bg-gray-800 text-white"
-                } transition-all duration-300 ease-in-out`}
-              >
-                FASHION
+              <h2 className="mb-6 text-2xl sm:text-4xl uppercase font-poppins font-bold">
+                Fashion
               </h2>
-        
               <p>Complete your style with awesome clothes from us.</p>
-              <div className="flex space-x-4 text-white">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaFacebook className="text-white bg-[#EBD96B] p-3 rounded text-2xl" />
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaInstagram className="text-white bg-[#EBD96B] p-3 rounded text-2xl" />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaTwitter className="text-white bg-[#EBD96B] p-3 rounded text-2xl" />
-                </a>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub className="text-white bg-[#EBD96B] p-3 rounded text-2xl" />
-                </a>
+              <div className="flex space-x-4 mt-3">
+                {[
+                  { href: "https://facebook.com", icon: <FaFacebookF /> },
+                  { href: "https://instagram.com", icon: <FaInstagram /> },
+                  { href: "https://twitter.com", icon: <FaTwitter /> },
+                  { href: "https://github.com", icon: <FaGithub /> },
+                ].map(({ href, icon }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-black bg-[#EBD96B] p-2 sm:p-3 rounded text-xl sm:text-2xl"
+                  >
+                    {icon}
+                  </a>
+                ))}
               </div>
             </div>
-            <div>
-              <h2
-                className={`mb-6 text-sm font-semibold  uppercase dark:text-white ${
-                  isToggled
-                    ? "bg-white text-gray-900"
-                    : "bg-gray-800 text-white"
-                } transition-all duration-300 ease-in-out`}
-              >
-                Help center
-              </h2>
-              <ul
-                className={`font-medium ${
-                  isToggled
-                    ? "bg-white text-gray-500 dark:text-gray-400"
-                    : "bg-gray-800 text-white"
-                } transition-all duration-300 ease-in-out`}
-              >
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Discord Server
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Twitter
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Facebook
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2
-                className={`mb-6 text-sm font-semibold  uppercase dark:text-white ${
-                  isToggled
-                    ? "bg-white text-gray-900"
-                    : "bg-gray-800 text-white"
-                } transition-all duration-300 ease-in-out`}
-              >
-                Legal
-              </h2>
-              <ul
-                className={`font-medium ${
-                  isToggled
-                    ? "bg-white text-gray-500 dark:text-gray-400"
-                    : "bg-gray-800 text-white"
-                } transition-all duration-300 ease-in-out`}
-              >
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Licensing
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Terms &amp; Conditions
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2
-                className={`mb-6 text-sm font-semibold  uppercase dark:text-white ${
-                  isToggled
-                    ? "bg-white text-gray-900"
-                    : "bg-gray-800 text-white"
-                } transition-all duration-300 ease-in-out`}
-              >
-                Download
-              </h2>
-              <ul
-                className={`font-medium ${
-                  isToggled
-                    ? "bg-white text-gray-500 dark:text-gray-400"
-                    : "bg-gray-800 text-white"
-                } transition-all duration-300 ease-in-out`}
-              >
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    iOS
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Android
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Windows
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    MacOS
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {[
+              {
+                title: "Company",
+                links: ["About", "Contact us", "Support", "Careers"],
+              },
+              {
+                title: "Quick Links",
+                links: [
+                  "Share Location",
+                  "Orders Tracking",
+                  "FAQs",
+                  "Terms & Conditions",
+                ],
+              },
+              {
+                title: "Legal",
+                links: ["Terms & Condition", "Privacy Policy"],
+              },
+            ].map(({ title, links }) => (
+              <div key={title}>
+                <h2 className="mb-6 text-sm font-semibold uppercase">{title}</h2>
+                <ul className="font-medium space-y-4">
+                  {links.map((link) => (
+                    <li key={link}>
+                      <a href="#" className="hover:underline">
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </footer>

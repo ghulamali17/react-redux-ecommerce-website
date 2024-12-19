@@ -8,7 +8,7 @@ function PayDaySale() {
       <section className='bg-primaryColor font-poppins w-[100%] '>
         <div className="grid lg:grid-cols-2 md:grid-cols-2 xs:grid-cols-1">
             <div className="left-content">
-                <img src="./assets/hero.png" alt="" className='md:h-[600px] w-full object-contain' />
+                <img src="./assets/bandana.png" alt="" className='md:h-[600px] w-full object-contain' />
             </div>
             <div className="right-content md:mt-0 xs:mt-3 md:px-[50px] md:py-[60px] xs:px-[18px] xs:py-[20px]">
             <h1 className="font-poppins font-bold md:text-7xl xs:text-5xl leading-tight">
