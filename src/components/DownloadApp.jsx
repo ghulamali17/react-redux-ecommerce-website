@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./DownloadApp.css";
+// import "./DownloadApp.css";
 import { useSelector } from "react-redux";
+import DownloadAppVideo from "./DonwloadAppVideo";
 
 function DownloadApp() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
@@ -14,7 +15,11 @@ function DownloadApp() {
       <section className="max-w-[1483px] mx-auto grid md:grid-cols-2 xs:grid-cols-1 gap-6 md:gap-12 md:p-24 xs:p-8 items-center">
         {/* Left Section */}
         <div className="left-text">
-          <h1  className={`capitalize font-poppins font-bold md:text-4xl xs:text-4xl leading-tight ${isToggled ? "text-[#191919]" : "text-white"}`}>
+          <h1
+            className={`capitalize font-poppins font-bold md:text-4xl xs:text-4xl leading-tight ${
+              isToggled ? "text-[#191919]" : "text-white"
+            }`}
+          >
             <span className="block">Download App &</span>
             <span>Get the Voucher</span>
           </h1>
@@ -37,34 +42,9 @@ function DownloadApp() {
         </div>
 
         {/* Right Section */}
-        <div className="relative right-img">
+        <div className="right-img">
           {/* Mobile Image */}
-          <img
-            src="./assets/Mobile.png"
-            className="absolute z-50 md:w-[350px] xs:w-[300px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            alt="Mobile Image"
-          />
-
-          {/* Circle Large */}
-          <img
-            src="./assets/circle-lg.svg"
-            className="absolute z-20 md:w-[400px] xs:w-[350px]  top-[50%] left-[50%]  transform -translate-x-1/2 -translate-y-1/2"
-            alt="Large Circle"
-          />
-
-          {/* Circle Medium */}
-          <img
-            src="./assets/circle-md.svg"
-            className="absolute z-30 md:w-[350px] xs:w-[300px] top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2"
-            alt="Medium Circle"
-          />
-
-          {/* Circle Small */}
-          <img
-            src="./assets/circle-sm.svg"
-            className="absolute z-40 md:w-[300px] xs:w-[270px] top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2"
-            alt="Small Circle"
-          />
+          <DownloadAppVideo />
         </div>
       </section>
     </div>

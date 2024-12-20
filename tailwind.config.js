@@ -17,7 +17,7 @@ export default {
         regular: "400",
       },
       colors: {
-        primaryColor: '#EBD96B',
+        primaryColor: '#E5C643',
       },
     },
   },

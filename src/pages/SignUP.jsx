@@ -6,9 +6,8 @@ import {
   app,
   getAuth,
   createUserWithEmailAndPassword,
-} from "../components/Firebase/firebase";
+} from "../Firebase/firebase.js";
 import { useSelector } from "react-redux";
-
 const auth = getAuth(app);
 
 function SignUP() {

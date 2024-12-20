@@ -1,48 +1,37 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CiDark } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
-import { toggle } from "../../redux/slice";
-import { useSelector } from "react-redux";
+import { toggle, clearUser } from "../../Redux/slice.js";
 import { getAuth, signOut } from "firebase/auth";
-// import { useNavigate } from "react-router-dom";
-import { clearUser } from "../../redux/slice";
 
 function Navbar() {
-  const Navigate = useNavigate();
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const user = useSelector((state) => state.myCart?.user);
 
   const toggleThemeHandler = () => {
     dispatch(toggle());
   };
+
   const toggleMenuHandler = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Getting Current User Firebase
-  const auth = getAuth();
-  const user = auth.currentUser;
-  if (user !== null) {
-    const email = user.email;
-    console.log(email);
-
-    const uid = user.uid;
-  }
-
   const logOutHandler = () => {
+    const auth = getAuth();
     signOut(auth)
       .then(() => {
         dispatch(clearUser());
 
-        localStorage.removeItem("user");
-
         alert("You have successfully logged out. Please log in again.");
 
-        Navigate("/login");
+        navigate("/login");
       })
       .catch((error) => {
         const errorMessage =
@@ -52,6 +41,16 @@ function Navbar() {
       });
   };
 
+  // Getting Current user
+  const auth = getAuth();
+  const user = auth.currentUser;
+  // useEffect(() => {
+
+  //   if (user) {
+  //     dispatch(setUser(user));
+  //   }
+  // }, [user]);
+
   return (
     <div>
       <nav
@@ -60,8 +59,8 @@ function Navbar() {
         } transition-all duration-300 ease-in-out border-gray-200 dark:bg-gray-900 `}
       >
         <div className="logo">
-          <h1 className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white"'>
-            Logo
+          <h1 className='self-center text-primaryColor text-2xl font-semibold whitespace-nowrap dark:text-white"'>
+            FASHION
           </h1>
         </div>
 

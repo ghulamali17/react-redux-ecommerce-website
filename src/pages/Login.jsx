@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "../components/Firebase/firebase";
+import { app } from "../Firebase/firebase.js";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// import { setUser } from "../redux/slice";
+import { setUser } from "../Redux/slice.js";
 
 const auth = getAuth(app);
 
@@ -12,10 +12,29 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // const user = useSelector((state) => state.myCart.user);
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+  // useEffect(() => {
+
+  //   if (user) {
+  //     dispatch(setUser(user));
+  //   }
+  // }, [user]);
+
+  // Getting Current User Firebase
+  // const auth = getAuth();
+  // const user = auth.currentUser;
+  // if (user !== null) {
+  //   dispatch(setUser(user));
+
+  //   const uid = user.uid;
+  // }
 
   const signInUser = (e) => {
     e.preventDefault();
@@ -50,10 +69,7 @@ function Login() {
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            className="space-y-6"
-            onSubmit={signInUser}
-          >
+          <form className="space-y-6" onSubmit={signInUser}>
             <div>
               <label
                 htmlFor="email"

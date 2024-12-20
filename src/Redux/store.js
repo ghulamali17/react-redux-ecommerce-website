@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cardSlice from "./slice";
 import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
 import {
@@ -11,12 +10,14 @@ import {
   REGISTER,
 } from "redux-persist";
 
+import slice from "./slice";
+
 const persistConfig = {
   key: "root",
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, cardSlice.reducer);
+const persistedReducer = persistReducer(persistConfig, slice.reducer);
 
 const store = configureStore({
   reducer: {

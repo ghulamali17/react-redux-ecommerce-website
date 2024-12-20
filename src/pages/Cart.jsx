@@ -31,6 +31,12 @@ function Cart() {
     return total + item.price * item.quantity;
   }, 0);
 
+  // Item Price Calculation
+  const getItemPrice = (id) => {
+    const item = cartData.find((item) => item.id === id);
+    return item ? item.price * item.quantity : 0;
+  };
+
   return (
     <div
       className={`pt-5 h-screen  ${
@@ -48,8 +54,13 @@ function Cart() {
 
       {cartData.length > 0 && (
         <div className="text-center mb-4">
-        
-          <Button click={clearCartHandler} title={'Clear Cart'} classname={'bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300'}/>
+          <Button
+            click={clearCartHandler}
+            title={"Clear Cart"}
+            classname={
+              "bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-300"
+            }
+          />
         </div>
       )}
 
@@ -102,7 +113,10 @@ function Cart() {
                 <td className="text-center py-4 break-words whitespace-normal">
                   {item.title}
                 </td>
-                <td className="text-center py-4">${item.price}</td>
+                <td className="text-center py-4">
+                  ${(item.price * item.quantity).toFixed(2)}
+                </td>
+
                 <td className="text-center py-4">
                   <div className="flex items-center justify-center space-x-2">
                     <IoAddCircle
@@ -158,7 +172,12 @@ function Cart() {
             </tr>
           </tbody>
         </table>
-        <Button title={'Proceed to Checkout'} classname={'bg-red-500 hover:bg-red-700 text-white font-semibold py-2 mt-4 px-4 rounded-lg shadow-md transition-all duration-300'}/>
+        <Button
+          title={"Proceed to Checkout"}
+          classname={
+            "bg-red-500 hover:bg-red-700 text-white font-semibold py-2 mt-4 px-4 rounded-lg shadow-md transition-all duration-300"
+          }
+        />
       </div>
     </div>
   );

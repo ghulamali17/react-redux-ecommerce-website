@@ -5,7 +5,7 @@ const slice = createSlice({
   initialState: {
     cartItems: [],
     toggle: false,
-    user: null,  // Store user details here
+    user: null,
   },
   reducers: {
     addToCart: (state, action) => {
@@ -40,10 +40,10 @@ const slice = createSlice({
       state.toggle = !state.toggle;
     },
     setUser: (state, action) => {
-      state.user = action.payload;  // Set the user details
+      state.user = action.payload;
     },
     clearUser: (state) => {
-      state.user = null;  // Clear user details on logout
+      state.user = null;
     },
   },
 });
@@ -55,8 +55,8 @@ export const {
   increment,
   decrement,
   toggle,
-  setUser,  // Export the setUser action
-  clearUser,  // Export the clearUser action
+  setUser,
+  clearUser,
 } = slice.actions;
 
 export default slice;
