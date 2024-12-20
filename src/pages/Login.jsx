@@ -1,47 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { app } from "../Firebase/firebase.js";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../Redux/slice.js";
 
-const auth = getAuth(app);
-
 function Login() {
+  const auth = getAuth(app);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const user = useSelector((state) => state.myCart.user);
+  const userCart = useSelector((state) => state.myCart.user);
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const auth = getAuth();
-  const user = auth.currentUser;
-  // useEffect(() => {
+  // checking Firebase authentication state and update the Redux store with the current user.
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(setUser(user));
+        console.log(user);
+      } else {
+        dispatch(setUser(null));
+        console.log("no user");
+      }
+    });
 
-  //   if (user) {
-  //     dispatch(setUser(user));
-  //   }
-  // }, [user]);
+    return () => unsubscribe();
+  }, [dispatch]);
 
-  // Getting Current User Firebase
-  // const auth = getAuth();
-  // const user = auth.currentUser;
-  // if (user !== null) {
-  //   dispatch(setUser(user));
-
-  //   const uid = user.uid;
-  // }
-
+  // Sign In function firebase
   const signInUser = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((value) => {
-        // const user = value.user;
-        // dispatch(setUser(user));
+        alert("Login Successfull.");
         navigate("/");
       })
       .catch((err) => alert(`Wrong Email or Password: ${err.message}`));
@@ -49,7 +50,7 @@ function Login() {
 
   return (
     <div
-      className={`${
+      className={`mt-[100px] ${
         isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
       } transition-all duration-300 ease-in-out`}
     >
@@ -57,9 +58,10 @@ function Login() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
+            src={isToggled ? "./assets/logo.svg" : "./assets/logo2.svg"}
+            alt="Logo"
           />
+
           <h2
             className={`mt-10 text-center text-2xl font-bold tracking-tight ${
               isToggled ? "text-gray-900" : "text-white"

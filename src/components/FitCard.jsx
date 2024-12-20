@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function YoungFavBox(props) {
+function FitCard(props) {
   return (
     <div>
       <div className="card">
@@ -15,4 +15,4 @@ function YoungFavBox(props) {
   );
 }
 
-export default YoungFavBox;
+export default FitCard;

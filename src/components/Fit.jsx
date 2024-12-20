@@ -1,8 +1,8 @@
 import React from "react";
-import YoungFavBox from "./YoungFavBox";
+import FitCard from "./FitCard";
 import { useSelector } from "react-redux";
 
-function YoungFav() {
+function Fit() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
   return (
     <div>
@@ -16,36 +16,37 @@ function YoungFav() {
             isToggled ? "text-white" : "bg-gray-800 text-white"
           } transition-all duration-300 ease-in-out`}
         >
-          <div className="relative">
+          <div className="relative z-0">
             <img
               src="./assets/design.svg"
-              className="absolute top-[70%] left-[20%] z-0"
+              className="absolute top-[70%] left-[22%] z-0"
               alt="design"
             />
             <h1
               className={`font-bold font-poppins text-5xl mb-5 pt-5 ${
                 isToggled ? "text-[#191919]" : "text-white"
-              } z-10 relative`}
+              } z-20 relative`}
             >
-             BEST FITS FOR YOU
+              BEST FITS FOR YOU
             </h1>
           </div>
+
           <div className="content grid md:grid-cols-3 sm:grid-cols-1 xs:grid-cols-1 mt-10 gap-6 justify-center">
-            <YoungFavBox
+            <FitCard
               classname={`text-xl font-poppins mt-3 ${
                 isToggled ? "text-[#7F7F7F]" : "text-white"
               }`}
               img="./assets/fav1.png"
               text="Hoodies & Sweetshirt"
             />
-            <YoungFavBox
+            <FitCard
               classname={`text-xl font-poppins mt-3  ${
                 isToggled ? "text-[#7F7F7F]" : "text-white"
               }`}
               img="./assets/fav3.png"
               text="Coats & Parkas"
             />
-            <YoungFavBox
+            <FitCard
               classname={`text-xl font-poppins mt-3  ${
                 isToggled ? "text-[#7F7F7F]" : "text-white"
               }`}
@@ -59,4 +60,4 @@ function YoungFav() {
   );
 }
 
-export default YoungFav;
+export default Fit;

@@ -8,7 +8,7 @@ function Footer() {
   return (
     <div>
       <footer
-       className="bg-black text-white"
+       className="bg-black md:p-8 text-white "
       >
         <div className="mx-auto w-full max-w-screen-xl">
           <div className="grid grid-cols-1 gap-8 px-4 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:py-8">

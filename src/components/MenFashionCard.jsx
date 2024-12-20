@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-function NewArrBox(props) {
+function MenFashionCard(props) {
   return (
     <div>
       <div className="card">
@@ -13,4 +13,4 @@ function NewArrBox(props) {
   )
 }
 
-export default NewArrBox
+export default MenFashionCard;

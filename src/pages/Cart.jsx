@@ -39,17 +39,25 @@ function Cart() {
 
   return (
     <div
-      className={`pt-5 h-screen  ${
+      className={`mt-[100px] pb-11 min-h-screen font-poppins ${
         isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
-      }  transition-all duration-300 ease-in-out`}
+      } transition-all duration-300 ease-in-out`}
     >
       <div className="text-2xl font-Jost text-center">
-        <h1>Cart</h1>
-        {cartData.length === 0
-          ? "Cart is empty"
-          : `${cartData.length} ${
-              cartData.length === 1 ? "Item" : "Items"
-            } in cart`}
+        <h1
+          className={`font-bold font-poppins text-5xl mb-5 pt-5 ${
+            isToggled ? "text-[#191919]" : "text-white"
+          }`}
+        >
+          CART
+        </h1>
+        <h3 className="font-bold">
+          {cartData.length === 0
+            ? "Cart Is Empty"
+            : `${cartData.length} ${
+                cartData.length === 1 ? "Item" : "Items"
+              } in cart`}
+        </h3>
       </div>
 
       {cartData.length > 0 && (
@@ -138,7 +146,7 @@ function Cart() {
         </table>
       </div>
 
-      <div className="total-amount w-full sm:w-[50%] border border-[#e2e9e1] p-8 mx-auto mt-6 pb-6">
+      <div className="total-amount w-full sm:w-[50%] border shadow-custom-shadow p-8 mx-auto ">
         <h3 className="text-xl font-semibold mb-4">Cart Totals</h3>
         <table className="border-collapse border border-gray-400 w-full text-left">
           <tbody>

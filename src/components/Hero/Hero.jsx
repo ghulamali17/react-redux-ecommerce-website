@@ -8,7 +8,7 @@ function Hero() {
   const navigate=useNavigate();
   return (
     <div
-      className={`md:p-12 ${
+      className={`md:p-12 mt-[100px] ${
         isToggled ? " text-black" : "bg-gray-800 text-white"
       } transition-all duration-300 ease-in-out`}
     >

@@ -17,6 +17,7 @@ function SignUP() {
   const navigate = useNavigate();
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
 
+  // Creating user account firebase
   const sendData = (e) => {
     e.preventDefault();
 

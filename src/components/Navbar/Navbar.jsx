@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CiDark } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
@@ -7,106 +7,103 @@ import { toggle, clearUser } from "../../Redux/slice.js";
 import { getAuth, signOut } from "firebase/auth";
 
 function Navbar() {
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
-  // const user = useSelector((state) => state.myCart?.user);
+  const user = useSelector((state) => state.myCart?.user);
 
   const toggleThemeHandler = () => {
     dispatch(toggle());
   };
 
-  const toggleMenuHandler = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
+  // Log out Handler 
   const logOutHandler = () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
         dispatch(clearUser());
-
-        alert("You have successfully logged out. Please log in again.");
-
+        alert("You have successfully logged out.");
         navigate("/login");
       })
       .catch((error) => {
         const errorMessage =
-          error.message ||
-          "An error occurred while logging out. Please try again.";
+          error.message || "An error occurred while logging out.";
         alert(errorMessage);
       });
   };
 
-  // Getting Current user
-  const auth = getAuth();
-  const user = auth.currentUser;
-  // useEffect(() => {
-
-  //   if (user) {
-  //     dispatch(setUser(user));
-  //   }
-  // }, [user]);
+  // Active class logic for Nav Links 
+  const getActiveClass = ({ isActive }) =>
+    isActive
+      ? `text-center p-3 mt-6 hover:bg-gray-800 hover:text-white ${
+          isToggled ? "bg-black text-white" : "bg-white text-black"
+        }`
+      : `hover:bg-gray-800 text-center p-3 mt-6 text-gray-500 hover:text-white`;
 
   return (
-    <div>
-      <nav
-        className={`h-[100px] flex justify-around items-center font-poppins font-medium shadow-custom-shadow  ${
-          isToggled ? "bg-white text-black" : "bg-black text-white "
-        } transition-all duration-300 ease-in-out border-gray-200 dark:bg-gray-900 `}
-      >
-        <div className="logo">
-          <h1 className='self-center text-primaryColor text-2xl font-semibold whitespace-nowrap dark:text-white"'>
-            FASHION
-          </h1>
-        </div>
+    <nav
+      className={`h-[100px] flex fixed w-[100%]  z-10 top-0 justify-around items-center font-poppins font-medium shadow-custom-shadow ${
+        isToggled ? "bg-white text-black" : "bg-black text-white"
+      } transition-all duration-300 ease-in-out border-gray-200`}
+    >
+      <div className="logo flex gap-1">
+        <img
+          src={isToggled ? "./assets/logo.svg" : "./assets/logo2.svg"}
+          alt="Logo"
+        />
+        <h1 className="self-center text-4xl font-semibold">FASHION</h1>
+      </div>
+      <button>
+        <i
+          className="fa-solid fa-bars md:hidden dark:bg-gray-800
+               md:dark:bg-gray-900 dark:border-gray-700 dark:text-white text-2xl"
+        ></i>
+      </button>
 
-        <button>
-          <i
-            onClick={toggleMenuHandler}
-            className={`fa-solid fa-bars md:hidden  dark:bg-gray-800
-               md:dark:bg-gray-900 dark:border-gray-700 dark:text-white  text-2xl`}
-          ></i>
-        </button>
-
-        <ul className="uppercase hidden md:flex gap-10 md:flex-row ">
+      <ul className="uppercase hidden md:flex gap-10 text-gray-500">
+        <li>
+          <NavLink to="/" className={getActiveClass}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/shop" className={getActiveClass}>
+            Products
+          </NavLink>
+        </li>
+        {user && (
           <li>
-            <Link to={"/"}>Home</Link>
+            <NavLink to="/cart" className={getActiveClass}>
+              Cart
+            </NavLink>
           </li>
-
+        )}
+        {!user ? (
           <li>
-            <Link to={"/shop"}>Products</Link>
+            <NavLink to="/signup" className={getActiveClass}>
+              Sign Up
+            </NavLink>
           </li>
-          {user && (
-            <li>
-              <Link to="/cart">Cart</Link>
-            </li>
-          )}
-
-          {!user ? (
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
+        ) : (
+          <li>
+            <button onClick={logOutHandler} className="hover:underline">
+              Log Out
+            </button>
+          </li>
+        )}
+        <li
+          className="cursor-pointer text-xl flex items-center"
+          onClick={toggleThemeHandler}
+        >
+          {isToggled ? (
+            <CiDark className="text-2xl" />
           ) : (
-            <li>
-              <Link onClick={logOutHandler} to="/logout">
-                Log Out
-              </Link>
-            </li>
+            <MdDarkMode className="text-2xl" />
           )}
-
-          <li
-            className="cursor-pointer text-xl flex items-center"
-            onClick={toggleThemeHandler}
-          >
-            {isToggled ? <CiDark /> : <MdDarkMode />}
-          </li>
-        </ul>
-      </nav>
-    </div>
+        </li>
+      </ul>
+    </nav>
   );
 }
 

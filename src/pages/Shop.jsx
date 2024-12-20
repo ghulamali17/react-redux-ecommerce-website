@@ -4,13 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Redux/slice";
 import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 function Shop() {
-  // Getting Current User Firebase
-  const auth = getAuth();
-  const user = auth.currentUser;
-
+  const [user, setUser] = useState(null);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,11 +19,20 @@ function Shop() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
 
   useEffect(() => {
-    myResponse();
+    getData();
+  }, []);
+
+  // Getting Current User
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
   }, []);
 
   // Fetch Product Data
-  const myResponse = async () => {
+  const getData = async () => {
     try {
       const response = await axios("https://fakestoreapi.com/products");
       setData(response.data);
@@ -56,13 +63,13 @@ function Shop() {
         <Loading />
       ) : (
         <div
-          className={`pt-5 font-poppins ${
+          className={`mt-[100px] font-poppins ${
             isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
           } transition-all duration-300 ease-in-out`}
         >
           {/* Title Section */}
           <div className="text-2xl font-Jost text-center mb-4">
-            <div className="relative">
+            <div className="relative z-0">
               <img
                 src="./assets/design.svg"
                 className="absolute top-[60%] left-[47%] z-0"
@@ -71,7 +78,7 @@ function Shop() {
               <h1
                 className={`font-bold font-poppins text-5xl mb-5 pt-5 ${
                   isToggled ? "text-[#191919]" : "text-white"
-                } z-10 relative`}
+                } z-20 relative`}
               >
                 SHOP NOW
               </h1>
@@ -102,13 +109,13 @@ function Shop() {
                       <div className="mt-4 px-5 pb-5">
                         <a href="#">
                           <h5 className="text-xl tracking-tight text-slate-900">
-                            {item.title}
+                            {`${item.title.substring(0, 15)}....`}
                           </h5>
                         </a>
                         <div className="mt-2 mb-5 flex items-center justify-between">
                           <p>
                             <span className="text-3xl font-bold text-slate-900">
-                              {item.price}
+                              {`$${item.price}`}
                             </span>
                             <span className="text-sm text-slate-900 line-through">
                               $999
@@ -165,8 +172,9 @@ function Shop() {
                             </span>
                           </div>
                         </div>
-                        <a
-                          href="#"
+
+                        <Link
+                          to="#"
                           className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
                           onClick={() => addToCartHandler(item)}
                         >
@@ -185,7 +193,14 @@ function Shop() {
                             />
                           </svg>
                           Add to cart
-                        </a>
+                        </Link>
+
+                        <Link
+                          to={`/products/${item.id}`}
+                          className="block mt-2 text-black text-center  hover:underline"
+                        >
+                          See More
+                        </Link>
                       </div>
                     </div>
                   </div>
