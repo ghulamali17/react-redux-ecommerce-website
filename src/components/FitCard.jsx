@@ -7,7 +7,7 @@ function FitCard(props) {
       <div className="card">
         <img src={props.img} alt={props.altText} />
         <p className={props.textClass}>{props.text}</p>
-        <Link className={props.expTextClass} to={"/products"}>
+        <Link className={props.expTextClass} to={"/shop"}>
           {props.expText}
         </Link>
       </div>

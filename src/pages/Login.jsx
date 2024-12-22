@@ -26,7 +26,13 @@ function Login() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(setUser(user));
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email,
+            name: user.displayName,
+          })
+        );
         console.log(user);
       } else {
         dispatch(setUser(null));

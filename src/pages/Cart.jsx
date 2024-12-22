@@ -146,7 +146,7 @@ function Cart() {
         </table>
       </div>
 
-      <div className="total-amount w-full sm:w-[50%] border shadow-custom-shadow p-8 mx-auto ">
+      <div className="total-amount w-full sm:w-[50%] border shadow-custom-shadow p-8 mx-auto mt-5">
         <h3 className="text-xl font-semibold mb-4">Cart Totals</h3>
         <table className="border-collapse border border-gray-400 w-full text-left">
           <tbody>

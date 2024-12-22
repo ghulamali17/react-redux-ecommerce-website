@@ -8,16 +8,16 @@ function Footer() {
   return (
     <div>
       <footer
-       className="bg-black md:p-8 text-white "
+       className="bg-black md:p-8 text-[#C2C8DA] "
       >
         <div className="mx-auto w-full max-w-screen-xl">
           <div className="grid grid-cols-1 gap-8 px-4 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:py-8">
             <div>
-              <h2 className="mb-6 text-2xl sm:text-4xl uppercase font-poppins font-bold">
+              <h2 className="mb-6 text-2xl text-white sm:text-4xl uppercase font-poppins font-bold">
                 Fashion
               </h2>
               <p>Complete your style with awesome clothes from us.</p>
-              <div className="flex space-x-4 mt-3">
+              <div className="flex  space-x-4 mt-3">
                 {[
                   { href: "https://facebook.com", icon: <FaFacebookF /> },
                   { href: "https://instagram.com", icon: <FaInstagram /> },
@@ -56,7 +56,7 @@ function Footer() {
               },
             ].map(({ title, links }) => (
               <div key={title}>
-                <h2 className="mb-6 text-sm font-semibold uppercase">{title}</h2>
+                <h2 className="mb-6 text-sm text-white font-semibold uppercase">{title}</h2>
                 <ul className="font-medium space-y-4">
                   {links.map((link) => (
                     <li key={link}>

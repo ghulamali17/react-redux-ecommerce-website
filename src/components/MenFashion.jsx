@@ -1,8 +1,9 @@
 import React from "react";
 import MenFashionCard from "./MenFashionCard";
 import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 function NewArrival() {
+  const navigate=useNavigate();
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
   return (
     <div>
@@ -38,6 +39,7 @@ function NewArrival() {
               }`}
               img="./assets/fashion1.png"
               text="Casual Classics"
+               click={() => navigate("/shop")}
             />
             <MenFashionCard
               classname={`text-xl font-poppins  mt-3 ${
@@ -45,6 +47,7 @@ function NewArrival() {
               }`}
               img="./assets/fashion2.png"
               text="Smart Formals"
+              click={() => navigate("/shop")}
             />
             <MenFashionCard
               classname={`text-xl font-poppins  mt-3 ${
@@ -52,6 +55,7 @@ function NewArrival() {
               }`}
               img="./assets/fashion3.png"
               text="Contemporary Wear"
+              click={() => navigate("/shop")}
             />
           </div>
         </div>

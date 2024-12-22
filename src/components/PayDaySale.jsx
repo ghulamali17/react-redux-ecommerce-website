@@ -2,8 +2,10 @@ import React from "react";
 import Button from "./Button";
 import { useSelector } from "react-redux";
 import "./PayDaySale.css";
+import { useNavigate } from "react-router-dom";
 function PayDaySale() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
+  const navigate=useNavigate();
   return (
     <div
       className={` pt-[100px] ${
@@ -40,6 +42,7 @@ function PayDaySale() {
       <Button
         title="SHOP NOW"
         classname="bg-black text-center p-3 text-white mt-6 hover:bg-gray-800"
+        click={() => navigate("/shop")}
       />
     </div>
   </div>

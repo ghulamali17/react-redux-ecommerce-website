@@ -1,42 +1,53 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   app,
   getAuth,
   createUserWithEmailAndPassword,
 } from "../Firebase/firebase.js";
+import { updateProfile } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../Redux/slice.js";
 import { useSelector } from "react-redux";
 const auth = getAuth(app);
 
 function SignUP() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
 
-  // Creating user account firebase
-  const sendData = (e) => {
-    e.preventDefault();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  // Create user with email and password firebase
+  const sendData = async (e) => {
+    e.preventDefault();
     if (!email || !password) {
       alert("Email and Password should not be empty");
       return;
     }
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        alert("Registration Successful");
-        navigate("/login");
-      })
-      .catch((error) => alert("Error: " + error.message));
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await updateProfile(userCredential.user, {
+        displayName: name,
+      });
+      alert("Registration Successful. Please log in.");
+      dispatch(setUser(null));
+      navigate("/login");
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
   };
 
   return (
     <div
-      className={` ${
+      className={`mt-10 ${
         isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
       } transition-all duration-300 ease-in-out`}
     >
@@ -63,8 +74,50 @@ function SignUP() {
             </Link>
           </p>
         </div>
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className=" sm:mx-auto sm:w-full sm:max-w-md">
           <div className="py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <div className="mt-6">
+              <label
+                className={` block text-sm font-medium leading-5${
+                  isToggled
+                    ? "bg-white text-gray-700 "
+                    : "bg-gray-800 text-white"
+                } transition-all duration-300 ease-in-out`}
+                htmlFor="name"
+              >
+                Name
+              </label>
+              <div className="mt-1 relative rounded-md shadow-sm">
+                <input
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  id="name"
+                  name="name"
+                  placeholder="Jhone"
+                  type="text"
+                  required=""
+                  className={` appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5${
+                    isToggled
+                      ? "bg-white text-gray-700 "
+                      : "bg-gray-800 text-black"
+                  } transition-all duration-300 ease-in-out`}
+                />
+                <div className="hidden absolute inset-y-0 right-0 pr-3 items-center pointer-events-none">
+                  <svg
+                    className="h-5 w-5 text-red-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
             <div className="mt-6">
               <label
                 className={` block text-sm font-medium leading-5${

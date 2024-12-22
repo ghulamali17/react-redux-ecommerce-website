@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp,  } from "firebase/app";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -11,7 +10,6 @@ const firebaseConfig = {
   appId: "1:521272247200:web:7996007c1a00fe39ecdac5"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 export {

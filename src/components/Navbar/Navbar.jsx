@@ -12,12 +12,13 @@ function Navbar() {
 
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
   const user = useSelector((state) => state.myCart?.user);
+  const displayName = user?.name || "Guest";
 
   const toggleThemeHandler = () => {
     dispatch(toggle());
   };
 
-  // Log out Handler 
+  // Log out Handler
   const logOutHandler = () => {
     const auth = getAuth();
     signOut(auth)
@@ -33,7 +34,7 @@ function Navbar() {
       });
   };
 
-  // Active class logic for Nav Links 
+  // Active class logic for Nav Links
   const getActiveClass = ({ isActive }) =>
     isActive
       ? `text-center p-3 mt-6 hover:bg-gray-800 hover:text-white ${
@@ -90,6 +91,11 @@ function Navbar() {
             <button onClick={logOutHandler} className="hover:underline">
               Log Out
             </button>
+          </li>
+        )}
+        {user && (
+          <li>
+            <span className="font-semibold">{displayName}</span>
           </li>
         )}
         <li
