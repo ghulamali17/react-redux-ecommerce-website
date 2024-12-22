@@ -86,8 +86,8 @@ function Shop() {
           </div>
 
           {/* Product Container */}
-          <div className="main-product-container">
-            <div className="product grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 max-w-[1170px] md:p-14 sm:p-8 xs:p-5 mx-auto gap-4">
+          <div className="main-product-container ">
+            <div className="product grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 md:grid-cols-2 max-w-[1170px] md:p-14 sm:p-8 xs:p-5 mx-auto gap-4">
               {/* Show Product Cards Section */}
               {data?.map((item) => (
                 <div className="content" key={item.id}>
@@ -98,7 +98,7 @@ function Shop() {
                         href="#"
                       >
                         <img
-                          className="object-cover"
+                          className="object-cover text-center"
                           src={item.image}
                           alt={item.title}
                         />
@@ -108,13 +108,13 @@ function Shop() {
                       </a>
                       <div className="mt-4 px-5 pb-5">
                         <a href="#">
-                          <h5 className="text-xl tracking-tight text-slate-900">
-                            {`${item.title.substring(0, 15)}....`}
+                          <h5 className="md:text-xl tracking-tight text-slate-900 text-sm">
+                            {`${item.title.substring(0, 20)}....`}
                           </h5>
                         </a>
                         <div className="mt-2 mb-5 flex items-center justify-between">
                           <p>
-                            <span className="text-3xl font-bold text-slate-900">
+                            <span className="text-3xl xs:text-sm font-bold text-slate-900">
                               {`$${item.price}`}
                             </span>
                             <span className="text-sm text-slate-900 line-through">

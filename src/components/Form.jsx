@@ -6,7 +6,7 @@ function Form() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
   return (
     <div className={`${isToggled ? "text-white" : "text-black"}`}>
-      <section className="form bg-[#E5C643] flex items-center  justify-center md:p-[70px] xs:p-6 text-center flex-col">
+      <section className="form bg-primaryColor flex items-center  justify-center md:p-[70px] xs:p-6 text-center flex-col">
         <h1 className=" font-poppins font-bold md:text-6xl xs:text-2xl leading-tight">
           <span className="block">JOIN SHOPPING COMMUNITY TO</span>
 

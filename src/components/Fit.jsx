@@ -19,7 +19,7 @@ function Fit() {
           <div className="relative z-0">
             <img
               src="./assets/design.svg"
-              className="absolute top-[70%] left-[22%] z-0"
+              className="absolute md:top-[70%] md:left-[22%] xs:top-[65%] xs:left-[4%] z-0"
               alt="design"
             />
             <h1
@@ -31,27 +31,28 @@ function Fit() {
             </h1>
           </div>
 
-          <div className="content grid md:grid-cols-3 sm:grid-cols-1 xs:grid-cols-1 mt-10 gap-6 justify-center">
+          <div className="content font-poppins grid md:grid-cols-3 text-black sm:grid-cols-1 xs:grid-cols-1 mt-10 gap-6 justify-center">
             <FitCard
-              classname={`text-xl font-poppins mt-3 ${
-                isToggled ? "text-[#7F7F7F]" : "text-white"
-              }`}
+              textClass={` mt-3 ${isToggled ? "text-black" : "text-white"}`}
+              expTextClass="text-lg text-[#7F7F7F]"
               img="./assets/fav1.png"
               text="Hoodies & Sweetshirt"
+              expText="Explore Now"
             />
+
             <FitCard
-              classname={`text-xl font-poppins mt-3  ${
-                isToggled ? "text-[#7F7F7F]" : "text-white"
-              }`}
+              textClass={` mt-3 ${isToggled ? "text-black" : "text-white"}`}
               img="./assets/fav3.png"
               text="Coats & Parkas"
+              expText="Explore Now"
+              expTextClass="text-lg text-[#7F7F7F]"
             />
             <FitCard
-              classname={`text-xl font-poppins mt-3  ${
-                isToggled ? "text-[#7F7F7F]" : "text-white"
-              }`}
+              textClass={`  mt-3 ${isToggled ? "text-black" : "text-white"}`}
               img="./assets/fav.png"
               text="Coats & Parkas"
+              expText="Explore Now"
+              expTextClass="text-lg text-[#7F7F7F]"
             />
           </div>
         </div>

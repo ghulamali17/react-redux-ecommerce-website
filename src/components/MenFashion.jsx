@@ -27,7 +27,7 @@ function NewArrival() {
                 isToggled ? "text-[#191919]" : "text-white"
               } z-20 relative`}
             >
-              MEN FASHION
+              MEN'S FASHION
             </h1>
           </div>
 

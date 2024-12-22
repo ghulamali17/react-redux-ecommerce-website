@@ -1,0 +1,8 @@
+@media (max-width: 786px) {
+    .payday {
+      display: flex;
+      flex-direction: column-reverse;
+      text-align: center;
+    }
+  }
+  

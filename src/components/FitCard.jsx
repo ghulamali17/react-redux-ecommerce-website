@@ -5,10 +5,10 @@ function FitCard(props) {
   return (
     <div>
       <div className="card">
-        <img src={props.img} alt="" />
-        <p className={props.classname}>{props.text}</p>
-        <Link className={props.classname} to={"/products"}>
-          Explore Now
+        <img src={props.img} alt={props.altText} />
+        <p className={props.textClass}>{props.text}</p>
+        <Link className={props.expTextClass} to={"/products"}>
+          {props.expText}
         </Link>
       </div>
     </div>
