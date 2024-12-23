@@ -45,7 +45,7 @@ function Shop() {
   // Add to Cart Handler
   const addToCartHandler = (items) => {
     if (!user) {
-      alert("Login to Add Products");
+      alert("Signup/ Login to Add Products");
       return;
     }
     const existingProduct = cartData.find((item) => item.id === items.id);

@@ -9,9 +9,11 @@ import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../Redux/slice.js";
 import { useSelector } from "react-redux";
-const auth = getAuth(app);
+import { useEffect } from "react";
 
 function SignUP() {
+  const auth = getAuth(app);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +23,6 @@ function SignUP() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Create user with email and password firebase
   const sendData = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -37,13 +38,15 @@ function SignUP() {
       await updateProfile(userCredential.user, {
         displayName: name,
       });
-      alert("Registration Successful. Please log in.");
-      dispatch(setUser(null));
-      navigate("/login");
+      alert("Registration Successful.");
+      navigate("/shop");
     } catch (error) {
       alert("Error: " + error.message);
     }
   };
+  useEffect(() => {
+    dispatch(setUser(null));
+  }, [dispatch]);
 
   return (
     <div

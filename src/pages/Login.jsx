@@ -49,7 +49,7 @@ function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((value) => {
         alert("Login Successfull.");
-        navigate("/");
+        navigate("/shop");
       })
       .catch((err) => alert(`Wrong Email or Password: ${err.message}`));
   };

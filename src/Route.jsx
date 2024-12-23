@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import SignUP from "./pages/SignUP";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
+import AdminLogin from "./pages/admin/AdminLogin";
 
 function AppRouter() {
   const appRoute = createBrowserRouter([
@@ -37,6 +38,10 @@ function AppRouter() {
         {
           path: "/shop",
           element: <Shop />,
+        },
+        {
+          path: "/admin-login",
+          element: <AdminLogin />,
         },
       ],
     },

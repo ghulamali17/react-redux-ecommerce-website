@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { CiDark } from "react-icons/ci";
-import { MdDarkMode } from "react-icons/md";
 import { toggle, clearUser } from "../../Redux/slice.js";
 import { getAuth, signOut } from "firebase/auth";
+import Dropdown from "../Dropdown.jsx";
+import DarkMode from "../DarkMode/DarkMode.jsx";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ function Navbar() {
         ></i>
       </button>
 
-      <ul className="uppercase hidden md:flex gap-10 text-gray-500">
+      <ul className="uppercase hidden md:flex gap-10 text-gray-500 items-center">
         <li>
           <NavLink to="/" className={getActiveClass}>
             Home
@@ -70,7 +70,7 @@ function Navbar() {
         </li>
         <li>
           <NavLink to="/shop" className={getActiveClass}>
-            Products
+            Shop
           </NavLink>
         </li>
         {user && (
@@ -93,21 +93,23 @@ function Navbar() {
             </button>
           </li>
         )}
-        {user && (
-          <li>
-            <span className="font-semibold">{displayName}</span>
-          </li>
-        )}
+        <li>
+          <NavLink to="/admin-login" className={getActiveClass}>
+            Admin
+          </NavLink>
+        </li>
         <li
           className="cursor-pointer text-xl flex items-center"
           onClick={toggleThemeHandler}
         >
-          {isToggled ? (
-            <CiDark className="text-2xl" />
-          ) : (
-            <MdDarkMode className="text-2xl" />
-          )}
+          <DarkMode />
         </li>
+        {user && (
+          <li className="flex items-center gap-2 cursor-pointer mt-3 text-gray-500">
+            <Dropdown/>
+            <span className="font-semibold text-xl">{displayName}</span>
+          </li>
+        )}
       </ul>
     </nav>
   );
