@@ -39,7 +39,7 @@ function SignUP() {
         displayName: name,
       });
       alert("Registration Successful.");
-      navigate("/shop");
+      navigate("/login");
     } catch (error) {
       alert("Error: " + error.message);
     }
@@ -50,7 +50,7 @@ function SignUP() {
 
   return (
     <div
-      className={`mt-10 ${
+      className={`mt-10 xs:mt-16 ${
         isToggled ? "bg-white text-black" : "bg-gray-800 text-white"
       } transition-all duration-300 ease-in-out`}
     >

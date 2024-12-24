@@ -6,6 +6,7 @@ import { getAuth, signOut } from "firebase/auth";
 import Dropdown from "../Dropdown.jsx";
 import DarkMode from "../DarkMode/DarkMode.jsx";
 import { RiCloseLargeFill } from "react-icons/ri";
+import { useEffect } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -40,8 +41,34 @@ function Navbar() {
   // Active class logic for Nav Links
   const getActiveClass = ({ isActive }) =>
     isActive
-      ? "text-center p-3 mt-6 bg-black text-white hover:bg-gray-800"
-      : "hover:bg-gray-800 text-center p-3 mt-6 text-gray-500 hover:text-white";
+      ? `text-center p-3 mt-6 ${
+          isToggled ? "bg-black text-white" : "bg-white text-black"
+        } hover:bg-gray-800`
+      : `hover:bg-gray-800 text-center p-3 mt-6 text-gray-500 hover:text-white`;
+
+  //Stop page scroll when the menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    } else {
+      const scrollY = Math.abs(parseInt(document.body.style.top || "0", 10));
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollY);
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+    };
+  }, [menuOpen]);
 
   return (
     <nav
@@ -56,7 +83,7 @@ function Navbar() {
         />
         <h1 className="self-center text-4xl font-semibold">FASHION</h1>
       </div>
-      {/* Hamburger  */}
+      {/* Hamburger */}
       <button onClick={() => setMenuOpen(true)} className="tablet:hidden block">
         <i className="fa-solid fa-bars dark:bg-gray-800 dark:border-gray-700 dark:text-white text-2xl"></i>
       </button>
@@ -64,20 +91,35 @@ function Navbar() {
       <div
         onClick={() => setMenuOpen(false)}
         className={`fixed h-full w-screen lg:hidden 
-  bg-black/50 backdrop-blur-sm top-0 right-0 
-  ${menuOpen ? "flex opacity-100" : "hidden opacity-0"} 
-  transition-opacity transform duration-700 ease-in-out`}
+    bg-black/50 backdrop-blur-sm top-0 right-0
+    ${menuOpen ? "flex opacity-100" : "hidden opacity-0"} 
+    transition-opacity transform duration-700 ease-in-out`}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="text-black bg-white w-56 flex-col absolute left-0 top-0 h-screen p-8 gap-8 z-50 flex"
+          className={`text-black w-56 flex-col absolute left-0 top-0 h-screen p-8 gap-8 z-50 flex 
+    ${isToggled ? "bg-white text-black" : "bg-gray-800 text-white"}`}
         >
           <RiCloseLargeFill
             onClick={() => setMenuOpen(false)}
             className="mt-0 mb-8 text-3xl cursor-pointer"
           />
           <ul className="uppercase flex flex-col gap-10 text-gray-500 items-center">
-            <li>
+            {user && (
+              <li className="flex absolute top-[85px] left-3 items-center gap-2 cursor-pointer mt-3 text-gray-500">
+                <Dropdown
+                  imgSrc="https://cdn-icons-png.flaticon.com/128/2202/2202112.png"
+                  classname={"w-8 h-8 rounded-full object-cover"}
+                  alt="User Icon"
+                  link1="Profile"
+                  link2="Setting"
+                  link3="Sign Out"
+                  onSignOut={logOutHandler}
+                />
+                <span className="font-semibold text-xl">{displayName}</span>
+              </li>
+            )}
+            <li className="mt-10">
               <NavLink
                 to="/"
                 className={getActiveClass}
@@ -144,12 +186,6 @@ function Navbar() {
             >
               <DarkMode />
             </li>
-            {user && (
-              <li className="flex items-center gap-2 cursor-pointer mt-3 text-gray-500">
-                <Dropdown />
-                <span className="font-semibold text-xl">{displayName}</span>
-              </li>
-            )}
           </ul>
         </div>
       </div>
@@ -157,25 +193,25 @@ function Navbar() {
       {/* Navbar Desktop  */}
       <ul className="uppercase hidden tablet:flex gap-10 text-gray-500 items-center">
         <li>
-          <NavLink to="/" className={getActiveClass(false)}>
+          <NavLink to="/" className={getActiveClass}>
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/shop" className={getActiveClass(false)}>
+          <NavLink to="/shop" className={getActiveClass}>
             Shop
           </NavLink>
         </li>
         {user && (
           <li>
-            <NavLink to="/cart" className={getActiveClass(false)}>
+            <NavLink to="/cart" className={getActiveClass}>
               Cart
             </NavLink>
           </li>
         )}
         {!user ? (
           <li>
-            <NavLink to="/signup" className={getActiveClass(false)}>
+            <NavLink to="/signup" className={getActiveClass}>
               Sign Up
             </NavLink>
           </li>
@@ -187,7 +223,7 @@ function Navbar() {
           </li>
         )}
         <li>
-          <NavLink to="/admin-login" className={getActiveClass(false)}>
+          <NavLink to="/admin-login" className={getActiveClass}>
             Admin
           </NavLink>
         </li>
@@ -199,7 +235,15 @@ function Navbar() {
         </li>
         {user && (
           <li className="flex items-center gap-2 cursor-pointer mt-3 text-gray-500">
-            <Dropdown />
+            <Dropdown
+              imgSrc="https://cdn-icons-png.flaticon.com/128/2202/2202112.png"
+              classname={"w-8 h-8 rounded-full object-cover"}
+              alt="User Icon"
+              link1="Profile"
+              link2="Setting"
+              link3="Sign Out"
+              click={"onSignOut"}
+            />
             <span className="font-semibold text-xl">{displayName}</span>
           </li>
         )}

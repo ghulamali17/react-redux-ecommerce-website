@@ -1,29 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getAuth, signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { clearUser } from "../Redux/slice";
 
-function Dropdown(props) {
+function Dropdown({
+  imgSrc,
+  alt = "Icon",
+  classname,
+  link1,
+  link2,
+  link3,
+  onSignOut,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
-  
-  // Log out Handler
-  const logOutHandler = () => {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        dispatch(clearUser());
-        alert("You have successfully logged out.");
-        navigate("/login");
-      })
-      .catch((error) => {
-        const errorMessage =
-          error.message || "An error occurred while logging out.";
-        alert(errorMessage);
-      });
-  };
 
   return (
     <div
@@ -32,11 +18,7 @@ function Dropdown(props) {
       onMouseLeave={() => setIsOpen(false)}
     >
       <button type="button" className="focus:outline-none">
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/2202/2202112.png"
-          className="w-8 h-8 rounded-full object-cover"
-          alt="User Avatar"
-        />
+        <img src={imgSrc} alt={alt} className={classname} />
       </button>
 
       {isOpen && (
@@ -47,7 +29,7 @@ function Dropdown(props) {
                 href="#"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
-                Profile
+                {link1}
               </a>
             </li>
             <li>
@@ -55,16 +37,16 @@ function Dropdown(props) {
                 href="#"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
-                Settings
+                {link2}
               </a>
             </li>
             <li>
               <a
-                onClick={logOutHandler}
+                onClick={onSignOut}
                 href="#"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
-                Sign out
+                {link3}
               </a>
             </li>
           </ul>
