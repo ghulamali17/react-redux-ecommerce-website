@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import SignUP from "./pages/SignUP";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
-import AdminLogin from "./pages/admin/AdminLogin";
+import UserProfile from "./pages/UserProfile";
 
 function AppRouter() {
   const appRoute = createBrowserRouter([
@@ -40,8 +40,8 @@ function AppRouter() {
           element: <Shop />,
         },
         {
-          path: "/admin-login",
-          element: <AdminLogin />,
+          path: "/profile",
+          element: <UserProfile/>
         },
       ],
     },

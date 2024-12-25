@@ -108,15 +108,16 @@ function Navbar() {
           <ul className="uppercase flex flex-col gap-10 text-gray-500 items-center">
             {user && (
               <li className="flex absolute top-[85px] left-3 items-center gap-2 cursor-pointer mt-3 text-gray-500">
-                <Dropdown
-                  imgSrc="https://cdn-icons-png.flaticon.com/128/2202/2202112.png"
-                  classname={"w-8 h-8 rounded-full object-cover"}
-                  alt="User Icon"
-                  link1="Profile"
-                  link2="Setting"
-                  link3="Sign Out"
-                  onSignOut={logOutHandler}
-                />
+                 <Dropdown
+              imgSrc="https://cdn-icons-png.flaticon.com/128/2202/2202112.png"
+              classname={"w-8 h-8 rounded-full object-cover"}
+              alt="User Icon"
+              link1="Profile"
+              link2="Setting"
+              link3="Sign Out"
+              linkClick={() => navigate("/profile")}
+              onSignOut={logOutHandler}
+            />
                 <span className="font-semibold text-xl">{displayName}</span>
               </li>
             )}
@@ -172,15 +173,6 @@ function Navbar() {
                 </button>
               </li>
             )}
-            <li>
-              <NavLink
-                to="/admin-login"
-                className={getActiveClass}
-                onClick={() => setMenuOpen(false)}
-              >
-                Admin
-              </NavLink>
-            </li>
             <li
               className="cursor-pointer text-xl flex items-center"
               onClick={toggleThemeHandler}
@@ -223,11 +215,6 @@ function Navbar() {
             </button>
           </li>
         )}
-        <li>
-          <NavLink to="/admin-login" className={getActiveClass}>
-            Admin
-          </NavLink>
-        </li>
         <li
           className="cursor-pointer text-xl flex items-center"
           onClick={toggleThemeHandler}
@@ -243,8 +230,10 @@ function Navbar() {
               link1="Profile"
               link2="Setting"
               link3="Sign Out"
-              click={"onSignOut"}
+              linkClick={() => navigate("/profile")}
+              onSignOut={logOutHandler}
             />
+
             <span className="font-semibold text-xl">{displayName}</span>
           </li>
         )}

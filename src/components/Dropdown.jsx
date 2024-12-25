@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Dropdown({
   imgSrc,
@@ -8,8 +9,10 @@ function Dropdown({
   link2,
   link3,
   onSignOut,
+  linkClick,
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div
@@ -24,7 +27,7 @@ function Dropdown({
       {isOpen && (
         <div className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-            <li>
+            <li onClick={linkClick}>
               <a
                 href="#"
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -32,6 +35,7 @@ function Dropdown({
                 {link1}
               </a>
             </li>
+
             <li>
               <a
                 href="#"
@@ -41,13 +45,12 @@ function Dropdown({
               </a>
             </li>
             <li>
-              <a
+              <button
                 onClick={onSignOut}
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                className="block px-4 py-2 w-full text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 {link3}
-              </a>
+              </button>
             </li>
           </ul>
         </div>
