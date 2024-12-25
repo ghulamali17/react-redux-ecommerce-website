@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import { addToCart } from "../Redux/slice";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
@@ -26,6 +27,7 @@ const ProductDetails = () => {
       const res = await axios(`https://fakestoreapi.com/products/${params.id}`);
       setProduct(res.data);
     } catch (error) {
+      toast.error("Something Went Wrong!")
       console.error("Error fetching product:", error);
     } finally {
       setLoading(false);
@@ -48,18 +50,18 @@ const ProductDetails = () => {
   // Add to Cart Handler
   const addToCartHandler = (item) => {
     if (!user) {
-      alert("Login to Add Products");
+      toast.error("Login to Add Products");
       return;
     }
     const existingProduct = cartData.find(
       (cartItem) => cartItem.id === item.id
     );
     if (existingProduct) {
-      alert("Product Already Exists");
+      toast.error("Product Already Exists");
       return;
     }
     dispatch(addToCart(item));
-    alert("Product Added to Cart");
+    toast.success("Product Added to Cart");
   };
 
   // Getting Current user firebase

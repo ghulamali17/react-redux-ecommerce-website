@@ -6,6 +6,7 @@ import Loading from "../components/Loading";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Shop() {
   const [user, setUser] = useState(null);
@@ -38,6 +39,9 @@ function Shop() {
       setData(response.data);
       setLoading(false);
     } catch (error) {
+      toast.error(
+        "Something went wrong! Please check your Internet Connection"
+      );
       console.error("Error fetching products:", error);
     }
   };
@@ -45,16 +49,16 @@ function Shop() {
   // Add to Cart Handler
   const addToCartHandler = (items) => {
     if (!user) {
-      alert("Signup/ Login to Add Products");
+      toast.error("Signup/ Login to Add Products");
       return;
     }
     const existingProduct = cartData.find((item) => item.id === items.id);
     if (existingProduct) {
-      alert("Product Already Exists");
+      toast.error("Product Already Exists");
       return;
     }
     dispatch(addToCart(items));
-    alert("Product Added to Cart");
+    toast.success("Product Added to Cart");
   };
 
   return (

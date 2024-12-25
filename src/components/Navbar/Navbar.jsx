@@ -7,6 +7,7 @@ import Dropdown from "../Dropdown.jsx";
 import DarkMode from "../DarkMode/DarkMode.jsx";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -28,13 +29,13 @@ function Navbar() {
     signOut(auth)
       .then(() => {
         dispatch(clearUser());
-        alert("You have successfully logged out.");
+        toast.success("You have successfully logged out.");
         navigate("/login");
       })
       .catch((error) => {
         const errorMessage =
           error.message || "An error occurred while logging out.";
-        alert(errorMessage);
+        toast.error(errorMessage);
       });
   };
 

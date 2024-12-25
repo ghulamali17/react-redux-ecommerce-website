@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../Redux/slice.js";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 function SignUP() {
   const auth = getAuth(app);
@@ -26,7 +27,7 @@ function SignUP() {
   const sendData = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      alert("Email and Password should not be empty");
+     toast.error("Email and Password should not be empty");
       return;
     }
     try {
@@ -38,10 +39,10 @@ function SignUP() {
       await updateProfile(userCredential.user, {
         displayName: name,
       });
-      alert("Registration Successful.");
-      navigate("/login");
+      toast.success("Registration Successful.");
+      navigate("/shop");
     } catch (error) {
-      alert("Error: " + error.message);
+      toast.error("Error: " + error.message);
     }
   };
   useEffect(() => {
@@ -96,7 +97,7 @@ function SignUP() {
                   value={name}
                   id="name"
                   name="name"
-                  placeholder="Jhone"
+                  placeholder="Ali"
                   type="text"
                   required=""
                   className={` appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5${

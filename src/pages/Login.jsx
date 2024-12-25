@@ -9,8 +9,8 @@ import { app } from "../Firebase/firebase.js";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../Redux/slice.js";
-import LoginLoading from "../components/LoginLoading.jsx";
 import Loading from "../components/Loading.jsx";
+import toast from 'react-hot-toast';
 
 function Login() {
   const auth = getAuth(app);
@@ -49,16 +49,16 @@ function Login() {
   // Sign In function firebase
   const signInUser = async (e) => {
     e.preventDefault();
-    setLoading(true); // Show loading spinner
+    setLoading(true); 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // alert("Login Successful.");
+      toast.success("Login Successfull")
       navigate("/shop");
     } catch (err) {
-      alert(`Wrong Email or Password`);
+      toast.error(`Wrong Email or Password`);
       console.log(err.message)
     } finally {
-      setLoading(false); // Hide loading spinner
+      setLoading(false); 
     }
   };
 
