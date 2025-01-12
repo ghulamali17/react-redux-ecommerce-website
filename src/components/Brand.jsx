@@ -1,5 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import hmImg from "../../assets/hm.png"
+import Shopify from "../../assets/shopify.png"
+import ObeyImg from "../../assets/obey.png"
+import LacosteImg from "../../assets/hm.png"
+import AmazonImg from "../../assets/hm.png"
 
 function Brand() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
@@ -10,28 +15,28 @@ function Brand() {
       } transition-all duration-300 ease-in-out`}
     >
       <img
-        src="./assets/hm.png"
+        src={hmImg}
         alt="Hm Logo"
         className="w-full sm:w-[45%] md:w-[10%] lg:w-[18%] h-[60px] object-contain"
       />
       <img
-        src="./assets/obey.png"
+        src={ObeyImg}
         alt="Obey Logo"
         className="w-full sm:w-[45%] md:w-[10%] lg:w-[18%]  h-[100px] object-contain"
       />
       <img
-        src="./assets/shopify.png"
+        src={Shopify}
         alt="Shopify Logo"
         className="w-full sm:w-[45%] md:w-[10%] lg:w-[18%]  h-[60px] object-contain"
       />
       <img
-        src="./assets/lacoste.png"
+        src={LacosteImg}
         alt="Lacoste Logo"
         className="w-full sm:w-[45%] md:w-[10%] lg:w-[18%]  h-[60px] object-contain"
       />
 
       <img
-        src="./assets/amazon.png"
+        src={AmazonImg}
         alt="Amazon Logo"
         className="w-full sm:w-[45%] md:w-[10%] lg:w-[18%]  h-[90px] object-contain"
       />

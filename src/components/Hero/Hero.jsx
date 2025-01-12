@@ -2,6 +2,8 @@ import React from "react";
 import Button from "../Button";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import heroImg from "../../../assets/hero.png"
+import star from "../../../assets/star.svg"
 
 function Hero() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
@@ -15,22 +17,22 @@ function Hero() {
       <section className="hero relative max-w-[1300px] mx-auto bg-[#F4F6F5] rounded-[30px] border border-black">
         {/* Stars */}
         <img
-          src="./assets/star.svg"
+          src={star}
           className="absolute top-[80%] left-[60%] xs:top-[50%] xs:left-[15%] sm:top-[75%] sm:left-[55%]"
           alt="star icon"
         />
         <img
-          src="./assets/star.svg"
+          src={star}
           className="absolute md:top-[85%] md:left-[90%] lg:top-[73%] lg:left-[93%] xs:top-[90%] xs:left-[2%] sm:top-[70%] sm:left-[85%]"
           alt="star icon"
         />
         <img
-          src="./assets/star.svg"
+         src={star}
           className="absolute top-[10%] left-[10%] xs:top-[45%] xs:left-[80%] sm:top-[12%] sm:left-[55%]"
           alt="star icon"
         />
         <img
-          src="./assets/star.svg"
+           src={star}
           className="absolute top-[15%] sm:top-[20%] sm:left-[85%] left-[93%] xs:top-[60%] xs:left-[80%]"
           alt="star icon"
         />
@@ -66,7 +68,7 @@ function Hero() {
 
           <div className="hero-right-content flex justify-center items-center">
             <img
-              src="./assets/hero.png"
+              src={heroImg}
               alt="Hero Section"
               className="w-full object-contain md:h-[600px]"
             />

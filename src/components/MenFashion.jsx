@@ -2,6 +2,11 @@ import React from "react";
 import MenFashionCard from "./MenFashionCard";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import fashion1 from "../../assets/fashion1.png"
+import fashion2 from "../../assets/fashion2.png"
+import fashion3 from "../../assets/fashion3.png"
+import design from "../../assets/design.svg"
+
 function NewArrival() {
   const navigate=useNavigate();
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
@@ -19,7 +24,7 @@ function NewArrival() {
         >
           <div className="relative z-0">
             <img
-              src="./assets/design.svg"
+              src={design}
               className="absolute top-[70%] left-[15%] z-0"
               alt="design"
             />
@@ -37,7 +42,7 @@ function NewArrival() {
               classname={`text-xl font-poppins mt-3 ${
                 isToggled ? "text-[#191919]" : "text-white"
               }`}
-              img="./assets/fashion1.png"
+              img={fashion1}
               text="Casual Classics"
                click={() => navigate("/shop")}
             />
@@ -45,7 +50,7 @@ function NewArrival() {
               classname={`text-xl font-poppins  mt-3 ${
                 isToggled ? "text-[#191919]" : "text-white"
               }`}
-              img="./assets/fashion2.png"
+              img={fashion2}
               text="Smart Formals"
               click={() => navigate("/shop")}
             />
@@ -53,7 +58,7 @@ function NewArrival() {
               classname={`text-xl font-poppins  mt-3 ${
                 isToggled ? "text-[#191919]" : "text-white"
               }`}
-              img="./assets/fashion3.png"
+              img={fashion3}
               text="Contemporary Wear"
               click={() => navigate("/shop")}
             />

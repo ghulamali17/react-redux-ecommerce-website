@@ -3,6 +3,7 @@ import Button from "./Button";
 import { useSelector } from "react-redux";
 import "./PayDaySale.css";
 import { useNavigate } from "react-router-dom";
+import manImg from "../../assets/man-img.png"
 function PayDaySale() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
   const navigate=useNavigate();
@@ -18,7 +19,7 @@ function PayDaySale() {
     {/* Image Section */}
     <div className="left-content">
       <img
-        src="./assets/man-img.png"
+        src={manImg}
         alt="Promo Man Image"
         className="md:h-[550px] w-full object-contain"
       />

@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import video from "../../assets/download.mp4"
 
 function DownloadAppVideo() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
@@ -20,7 +21,7 @@ function DownloadAppVideo() {
             autoPlay
             muted
             loop
-            src="./assets/download.mp4"
+            src={video}
             className="w-full h-1/2 rounded-2xl"
           ></video>
         </div>

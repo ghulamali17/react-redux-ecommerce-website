@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "./DownloadApp.css";
 import { useSelector } from "react-redux";
 import DownloadAppVideo from "./DonwloadAppVideo";
+import AppStore from "../../assets/app-store.png"
 
 function DownloadApp() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
@@ -32,7 +32,7 @@ function DownloadApp() {
             </p>
             <div className="download flex gap-3 mt-10">
               <Link to={"#"}>
-                <img src="./assets/app-store.png" alt="App Store" />
+                <img src={AppStore} alt="App Store" />
               </Link>
               <Link to={"#"}>
                 <img src="./assets/play-store.png" alt="Play Store" />

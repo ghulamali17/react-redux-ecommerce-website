@@ -24,6 +24,7 @@ function SignUP() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+// Sign up 
   const sendData = async (e) => {
     e.preventDefault();
     if (!email || !password) {

@@ -8,6 +8,8 @@ import DarkMode from "../DarkMode/DarkMode.jsx";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import Logo1 from "../../../assets/logo.svg"
+import Logo2 from "../../../assets/logo2.svg"
 
 function Navbar() {
   const navigate = useNavigate();
@@ -78,10 +80,7 @@ function Navbar() {
       } transition-all duration-300 ease-in-out border-gray-200`}
     >
       <div className="logo flex gap-1">
-        <img
-          src={isToggled ? "./assets/logo.svg" : "./assets/logo2.svg"}
-          alt="Logo"
-        />
+      <img src={isToggled ? Logo1 : Logo2} alt="Logo" />
         <h1 className="self-center text-4xl font-semibold">FASHION</h1>
       </div>
       {/* Hamburger */}

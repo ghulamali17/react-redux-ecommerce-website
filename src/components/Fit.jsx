@@ -1,6 +1,10 @@
 import React from "react";
 import FitCard from "./FitCard";
 import { useSelector } from "react-redux";
+import design from "../../assets/design.svg"
+import fav from "../../assets/fav.png"
+import fav1 from "../../assets/fav1.png"
+import fav3 from "../../assets/fav3.png"
 
 function Fit() {
   const isToggled = useSelector((state) => state.myCart?.toggle || false);
@@ -18,7 +22,7 @@ function Fit() {
         >
           <div className="relative z-0">
             <img
-              src="./assets/design.svg"
+              src={design}
               className="absolute md:top-[70%] md:left-[22%] xs:top-[65%] xs:left-[4%] z-0"
               alt="design"
             />
@@ -35,21 +39,21 @@ function Fit() {
             <FitCard
               textClass={` mt-3 ${isToggled ? "text-black" : "text-white"}`}
               expTextClass="text-lg text-[#7F7F7F]"
-              img="./assets/fav1.png"
+              img={fav1}
               text="Hoodies & Sweetshirt"
               expText="Explore Now"
             />
 
             <FitCard
               textClass={` mt-3 ${isToggled ? "text-black" : "text-white"}`}
-              img="./assets/fav3.png"
+              img={fav3}
               text="Coats & Parkas"
               expText="Explore Now"
               expTextClass="text-lg text-[#7F7F7F]"
             />
             <FitCard
               textClass={`  mt-3 ${isToggled ? "text-black" : "text-white"}`}
-              img="./assets/fav.png"
+              img={fav}
               text="Coats & Parkas"
               expText="Explore Now"
               expTextClass="text-lg text-[#7F7F7F]"
