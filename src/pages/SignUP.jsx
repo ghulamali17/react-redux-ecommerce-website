@@ -41,7 +41,7 @@ function SignUP() {
         displayName: name,
       });
       toast.success("Registration Successful.");
-      navigate("/shop");
+        navigate("/login");
     } catch (error) {
       toast.error("Error: " + error.message);
     }
