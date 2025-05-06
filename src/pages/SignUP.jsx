@@ -25,27 +25,60 @@ function SignUP() {
   const dispatch = useDispatch();
 
 // Sign up 
+  // const sendData = async (e) => {
+  //   e.preventDefault();
+  //   if (!email || !password) {
+  //    toast.error("Email and Password should not be empty");
+  //     return;
+  //   }
+  //   try {
+  //     const userCredential = await createUserWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password
+  //     );
+  //     await updateProfile(userCredential.user, {
+  //       displayName: name,
+  //     });
+  //     toast.success("Registration Successful.");
+  //     navigate("/shop");
+  //   } catch (error) {
+  //     toast.error("Error: " + error.message);
+  //   }
+  // };
   const sendData = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-     toast.error("Email and Password should not be empty");
+      toast.error("Email and Password should not be empty");
       return;
     }
+  
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+  
       await updateProfile(userCredential.user, {
         displayName: name,
       });
+  
+      dispatch(
+        setUser({
+          name: userCredential.user.displayName,
+          email: userCredential.user.email,
+          uid: userCredential.user.uid,
+        })
+      );
+  
       toast.success("Registration Successful.");
-        navigate("/login");
+      navigate("/shop");
     } catch (error) {
       toast.error("Error: " + error.message);
     }
   };
+  
   useEffect(() => {
     dispatch(setUser(null));
   }, [dispatch]);
