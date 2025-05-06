@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../Redux/slice.js";
 import Loading from "../components/Loading.jsx";
 import toast from 'react-hot-toast';
+import Logo1 from "../../assets/logo.svg"
+import Logo2 from "../../assets/logo2.svg"
 
 function Login() {
   const auth = getAuth(app);
@@ -35,7 +37,7 @@ function Login() {
             email: user.email,
             name: user.displayName,
           })
-        );
+        );l
         console.log(user);
       } else {
         dispatch(setUser(null));
@@ -74,11 +76,7 @@ function Login() {
         >
           <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-              <img
-                className="mx-auto h-10 w-auto"
-                src={isToggled ? "./assets/logo.svg" : "./assets/logo2.svg"}
-                alt="Logo"
-              />
+               <img  className="mx-auto h-10 w-auto" src={isToggled ? Logo1 : Logo2} alt="Logo" />
 
               <h2
                 className={`mt-10 text-center text-2xl font-bold tracking-tight ${
